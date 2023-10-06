@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<title>Testonnage</title>
+		<link rel="stylesheet" type="text/css" href="paper.css" />
+		<link rel="stylesheet" type="text/css" href="paperplus.css" />
+		<link rel="stylesheet" type="text/css" href="https://jsxgraph.org/distrib/jsxgraph.css" />
+		<script type="text/javascript" src="https://jsxgraph.org/distrib/jsxgraphcore.js"></script>
+		<script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js'></script>
+	</head>
+	<body id="home">
+		<div id="options">
+			<div id="btnsExo">
+				<div>
+					<button class="btnExo" onclick="creerCarte(arrondis)">Arrondis</button>
+					<button class="btnExo" onclick="creerCarte(compNombres)">Comparaisons</button>
+					<button class="btnExo" onclick="creerCarte(scienti)">Écriture scientifique</button>
+					<button class="btnExo" onclick="creerCarte(scientideci)">Lire l'écriture scientifique</button>
+				</div>
+				<div>
+					<button class="btnExo" onclick="creerCarte(tablesmulti)">Tables multi</button>
+					<button class="btnExo" onclick="creerCarte(puiss10)">Puissances de 10</button>
+				</div>
+				<div>
+					<button class="btnExo" onclick="creerCarte(unites,1)">Unités simples</button>
+					<button class="btnExo" onclick="creerCarte(unites,2)">Surfaces et volumes</button>
+					<button class="btnExo" onclick="creerCarte(durees,1)">Durées (facile)</button>
+					<button class="btnExo" onclick="creerCarte(durees,2)">Durées (moyen)</button>
+					<button class="btnExo" onclick="creerCarte(durees,3)">Durées (difficile)</button>
+				
+				</div>
+				<div>
+					<button class="btnExo" onclick="creerCarte(tabprop)">Vérifier proportionnalité</button>
+					<button class="btnExo" onclick="creerCarte(quatprop)">Quatrième proportionnelle</button>
+					<!--<button class="btnExo" onclick="creerCarte(echelles)">Échelles</button>-->
+				</div>
+				<div>	
+					<button class="btnExo" onclick="creerCarte(fracsimp)">Simplifier</button>
+					<button class="btnExo" onclick="creerCarte(fraccalc)">Calculs fractions</button>
+				</div>
+				<div>
+					<button class="btnExo" onclick="creerCarte(statsCirc)">TEST</button>
+				</div>
+				<div>
+					<button class="btnExo" onclick="creerCarte(equa1d,1)">Équation ax=d</button>
+					<button class="btnExo" onclick="creerCarte(equa1d,2)">Équation ax+b=d</button>
+					<button class="btnExo" onclick="creerCarte(equa1d,3)">Équation ax+b=cx+d</button>
+					<button class="btnExo" onclick="creerCarte(equa2d,1)">Équation 2nd degré</button>
+				</div>
+				<div>
+					<button class="btnExo" onclick="creerCarte(pythagore,1)">Relation de Pythagore (1)</button>
+					<button class="btnExo" onclick="creerCarte(pythagore,2)">Relation de Pythagore (2)</button>
+					<button class="btnExo" onclick="creerCarte(pythagore,3)">Calcul avec Pythagore</button>
+				</div>
+				<div>
+					<button class="btnExo" onclick="creerCarte(carre)">Fonctions 1</button>
+				</div>
+			</div>
+			<div>
+				Nombre de cartes : <span id="compte"></span>
+				<button id="btnImpr" class="btn-small" onclick="imprimer()">Imprimer</button>
+				<button id="btnReponses" class="btn-small btn-warning-outline" onclick="togReponses()">Voir les réponses</button>
+				<button id="btnDup" class="btn-small btn-success-outline" onclick="dupCarte()">Dupliquer</button>
+				<button id="btnDupTout" class="btn-small btn-success-outline" onclick="dupTout()">Tout dupliquer</button>
+				<button class="btn-small btn-danger-outline" onclick="supprCarte()">Supprimer</button>
+				<button class="btn-small btn-danger-outline" onclick="supprTout()">Tout supprimer</button>
+			</div>
+		</div>
+		<div class="row">
+			
+			<div id="cartes" class="col"></div>
+			<div id="dos" class="col collapse"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="exos.js"></script>
+	<script type="text/javascript" src="utils.js"></script>
+</html>

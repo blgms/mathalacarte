@@ -1,0 +1,111 @@
+@media only screen {
+	.collapse {
+		display: none;
+	}
+	#cartes, #dos {
+		margin: 0 auto;
+	}
+	.dos {
+		float: left;
+		border-style : dashed;
+		border-width: 2px;
+		border-radius: 8px;
+		margin: 0 10px 10px 0;
+	}
+	.carte {
+		margin: 0 10px 10px 0;
+		float: left;
+	}
+}
+
+#btnsExo div {
+	display: inline;
+	padding-right: 30px;
+}
+
+.carte, .dos {
+	vertical-align: top;
+	max-width: 6cm;
+	width:5.8cm;
+	height:8.7cm;
+	padding:0.3cm;
+}
+
+.carte {
+	border-style : dashed;
+	border-width: 2px;
+	border-radius: 8px;
+}
+
+.consigne {
+	margin: 0.1cm;
+	padding: auto;
+	font-size: 0.9em;
+	height: 2cm;
+}
+.titre {
+	font-size: 1.3em;
+	margin: 0.1cm 0.1cm 0.2cm 0.1cm;
+	border-bottom: 2px solid;
+}
+
+.jxgbox {
+	width: 5cm;
+	height: 5cm;
+	border-style: none!important;
+}
+
+.centre {
+	width: min-content;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.nombres {
+	text-align: center;
+	line-height: 3em;
+}
+
+.proportion tr:first-child td {
+	border-top: 0;
+}
+.proportion td {
+	text-align: center;
+	border-top: 2px solid currentColor;
+	border-left: 2px solid currentColor;
+}
+.proportion tr:last-child th {
+	border-top: 2px solid currentColor;
+}
+
+@media print {
+	body {
+		display: block;
+		margin: 0 auto;
+		width: 18.5cm;
+		margin: 0 auto!important;
+    }
+    .row {
+		display: block;
+		margin: 0 auto;
+    }
+	#options {
+		display: none;
+	}
+	#cartes {
+		width: fit-content;
+		margin-left: auto; margin-right: auto;
+		page-break-after: always;
+	}
+	.carte {
+		float: left;
+	}
+	#dos {
+		width: fit-content;
+		margin-left: auto; margin-right: auto;
+		page-break-before: always;
+	}
+	.dos {
+		float: right;
+	}
+}
