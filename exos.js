@@ -499,76 +499,87 @@ function pythagore(exo) {
 	}
 	return ["Pythagore",consigne,"",reponse];
 }
-/*
-function pythagore(exo) {
-	let L = [];
-	if (exo<3) {L = tripletsPyth(1,10); } else {
-		L = tripletsPyth(10,100);
-		for (i in L) {
-			L[i] = L[i].map(function(a) {return a/10;}); 
-		}
-	}
+
+
+//REPERAGE
+function lectPts() {
+	let pts = [
+		[randint(-8,8)/2, randint(-8,8)/2],
+		[randint(-8,8)/2, randint(-8,8)/2],
+		[randint(-8,8)/2, randint(-8,8)/2]
+	];
 	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
-	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-6, 6, 6, -6], keepaspectratio:true, showCopyright:false, shownavigation:false});
+	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-5, 5, 5, -5], axis:true, keepaspectratio:true, showCopyright:false, shownavigation:false});
 	let cerise = {
 			strokeColor: '#901B77',
-			fillColor: '#CA147A'
+			fillColor: '#CA147A',
+			size: '1'
 		},
-		alpha = randint(-25,25)*Math.PI/180,
-		sel = randint(0,L.length-1),
-		mL = L[sel][2],
-		nL = L[sel][0],
-		pL = L[sel][1],
-		x0 = randint(-3,-2),
-		y0 = randint(0,3),
-		mirrx = randoppose(),
-		mirry = randoppose(),
-		x = [x0, x0+nL*Math.cos(alpha), x0+pL*Math.cos(alpha-Math.PI/2)].map(function(i) { return i * mirrx ;}),
-		y = [y0, y0+nL*Math.sin(alpha), y0+pL*Math.sin(alpha-Math.PI/2)].map(function(i) { return i * mirry ;}),
-		coord = [
-			[x[0],y[0],"p0"],
-			[x[1],y[1],"p1"],
-			[x[2],y[2],"p2"]
-		].sort(() => Math.random() - 0.5),
-		A = board.create('point', [coord[0][0],coord[0][1]], cerise),
-		B = board.create('point', [coord[1][0],coord[1][1]], cerise),
-		C = board.create('point', [coord[2][0],coord[2][1]], cerise),
-		pol = board.create('polygon',[A,B,C], {
-			fillColor: '#FFFF00',
-			lines: {
-				strokeWidth: 2,
-				strokeColor: '#009256'
-			}
-		}),
-		pts = [
-		["A","B","C"],
-		[coord[0][2],coord[1][2],coord[2][2]]
-		];
-	let M = pts[0][pts[1].indexOf("p0")],
-		N = pts[0][pts[1].indexOf("p1")],
-		P = pts[0][pts[1].indexOf("p2")],
-		m = N+P, n = M+P, p = M+N;
-	let cotes = [
-		[m, n+"²&nbsp;+&nbsp;"+p+"²", mL],
-		[n, m+"²&nbsp;-&nbsp;"+p+"²", nL],
-		[p, m+"²&nbsp;-&nbsp;"+n+"²", pL]
-	].sort(() => Math.random() - 0.5);
-	let consigne, reponse;
-	if (exo == 1) {
-		consigne = "Écrire la relation permettant de calculer la longueur "+cotes[0][0]+" dans ce triangle rectangle.";
-		reponse = cotes[0][0]+"²&nbsp;=&nbsp;"+cotes[0][1];
-	} else if (exo > 1) {
-		consigne = "Calculer la longueur "+cotes[0][0]+" dans ce triangle rectangle, sachant que "+cotes[1][0]+" = "+cotes[1][2]+" et "+cotes[2][0]+" = "+cotes[2][2]+".";
-		reponse = cotes[0][0]+"&nbsp;=&nbsp;"+cotes[0][2];
-	}
-	return ["Pythagore",consigne,"",reponse];
+		A = board.create('point', [pts[0][0],pts[0][1]], cerise),
+		B = board.create('point', [pts[1][0],pts[1][1]], cerise),
+		C = board.create('point', [pts[2][0],pts[2][1]], cerise);
+	let consigne = "Donner les coordonnées des points \\(A\\), \\(B\\) et \\(C\\)."
+	let reponse = "<div class='grid nombres reponse'>\\(A("+pointVirg(pts[0][0].toString())+";"+pointVirg(pts[0][1].toString())+")\\)<br>\\(B("+pointVirg(pts[1][0].toString())+";"+pointVirg(pts[1][1].toString())+")\\)<br>\\(C("+pointVirg(pts[2][0].toString())+";"+pointVirg(pts[2][1].toString())+")\\)"
+	return ["Repérage",consigne,"",reponse];
 }
-*/
 
-function carre() {
-	document.getElementById("titre"+idCarte).innerHTML = "Fonctions";
-	document.getElementById("consigne"+idCarte).innerHTML = "Fonction carré";
+function coeffDir() {
+	let pts = [
+		[randint(0,3), randint(-4,4)],
+		[randint(4,7), randint(-4,4)]
+	];
+	while (pts[1][0] == pts[0][0]) { pts[1][0] = randint(-4,4); }
 	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
-	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-4, 4, 4, -1], axis:true, keepaspectratio:true, showCopyright:false, shownavigation:false});
-	let graph = board.create('functiongraph',[function(x){ return x*x; },-6,6]);
+	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-1, 5, 9, -5], axis:true, keepaspectratio:true, showCopyright:false, shownavigation:false});
+	let cerise = {
+			strokeColor: '#901B77',
+			fillColor: '#CA147A',
+			size: '1'
+		},
+		A = board.create('point', [pts[0][0],pts[0][1]], cerise),
+		B = board.create('point', [pts[1][0],pts[1][1]], cerise);
+	let consigne = "Calculer la pente de la droite \\((AB)\\)."
+	let reponse = "<div class='grid nombres reponse'>\\( a="+ pointVirg( (Math.round(((pts[1][1]-pts[0][1])/(pts[1][0]-pts[0][0])*100))/100).toString() ) +" \\)"
+	return ["Repérage",consigne,"",reponse];
+}
+
+
+//VECTEURS
+function lectVec() {
+	let pts = [
+		[randint(-4,4), randint(-4,4)],
+		[randint(-4,4), randint(-4,4)],
+		[randint(-4,4), randint(-4,4)]
+	];
+	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
+	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-5, 5, 5, -5], axis:true, keepaspectratio:true, showCopyright:false, shownavigation:false});
+	let cerise = {
+			strokeColor: '#901B77',
+			fillColor: '#CA147A',
+			size: '1'
+		},
+		A = board.create('point', [pts[0][0],pts[0][1]], cerise),
+		B = board.create('point', [pts[1][0],pts[1][1]], cerise),
+		C = board.create('point', [pts[2][0],pts[2][1]], cerise);
+	var vAB = board.create('line',[[pts[0][0],pts[0][1]], [pts[1][0],pts[1][1]] ],{straightFirst:false, straightLast:false, lastArrow:true});
+	var vBC = board.create('line',[[pts[1][0],pts[1][1]], [pts[2][0],pts[2][1]] ],{straightFirst:false, straightLast:false, lastArrow:true, strokeColor:'red'});
+	var vAC = board.create('line',[[pts[0][0],pts[0][1]], [pts[2][0],pts[2][1]] ],{straightFirst:false, straightLast:false, lastArrow:true, strokeColor:'green'});
+	let consigne = "Donner les coordonnées des vecteurs \\( \\vec{AB} \\), \\( \\vec{BC} \\) et \\( \\vec{AC} \\)."
+	let reponse = "<div class='grid nombres reponse'>\\( \\vec{AB} = \\binom{"+pointVirg((pts[1][0]-pts[0][0]).toString())+"}{"+pointVirg((pts[1][1]-pts[0][1]).toString())+"} \\)<br>\\( \\vec{BC} = \\binom{"+pointVirg((pts[2][0]-pts[1][0]).toString())+"}{"+pointVirg((pts[2][1]-pts[1][1]).toString())+"}\\)<br>\\( \\vec{AC} = \\binom{"+pointVirg((pts[2][0]-pts[0][0]).toString())+"}{"+pointVirg((pts[2][1]-pts[0][1]).toString())+"} \\)"
+	return ["Vecteurs",consigne,"",reponse];
+}
+
+
+//FONCTIONS
+function lectCarre() {
+	let ptsx = [randint(-6,6)/2, randint(-6,6)/2, randint(-6,6)/2];
+	while (ptsx[1] == ptsx[0]) { ptsx[1] = randint(-6,6)/2; }
+	while (ptsx[2] == ptsx[0] || ptsx[2] == ptsx[1]) { ptsx[2] = randint(-5,5)/2; }
+	let ptsy = ptsx.map((x) => x**2);
+	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
+	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-4, 7, 4, -1], axis:true, keepaspectratio:true, showCopyright:false, shownavigation:false});
+	let graph = board.create('functiongraph',[function(x){ return x*x; },-5,5]);
+	let consigne = "Donner l'image par la fonction \\(f\\) représentée ci-dessous des nombres \\("+pointVirg(ptsx[0].toString())+"\\), \\("+pointVirg(ptsx[1].toString())+"\\) et \\("+pointVirg(ptsx[2].toString())+"\\).";
+	let reponse = "<div class='grid nombres reponse'>\\(f("+pointVirg(ptsx[0].toString())+")="+pointVirg(ptsy[0].toString())+"\\)<br>\\(f("+pointVirg(ptsx[1].toString())+")="+pointVirg(ptsy[1].toString())+"\\)<br>\\(f("+pointVirg(ptsx[2].toString())+")="+pointVirg(ptsy[2].toString())+"\\)</div>"
+	return ["Fonctions",consigne,"",reponse];
 }

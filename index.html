@@ -43,9 +43,9 @@
 					<button class="btnExo" onclick="creerCarte(statsCirc)">TEST</button>
 				</div>
 				<div>
-					<button class="btnExo" onclick="creerCarte(equa1d,1)">Équation ax=d</button>
-					<button class="btnExo" onclick="creerCarte(equa1d,2)">Équation ax+b=d</button>
-					<button class="btnExo" onclick="creerCarte(equa1d,3)">Équation ax+b=cx+d</button>
+					<button class="btnExo" onclick="creerCarte(equa1d,1)">Équation \(ax=d\)</button>
+					<button class="btnExo" onclick="creerCarte(equa1d,2)">Équation \(ax+b=d\)</button>
+					<button class="btnExo" onclick="creerCarte(equa1d,3)">Équation \(ax+b=cx+d\)</button>
 					<button class="btnExo" onclick="creerCarte(equa2d,1)">Équation 2nd degré</button>
 				</div>
 				<div>
@@ -54,23 +54,24 @@
 					<button class="btnExo" onclick="creerCarte(pythagore,3)">Calcul avec Pythagore</button>
 				</div>
 				<div>
-					<button class="btnExo" onclick="creerCarte(carre)">Fonctions 1</button>
+					<button class="btnExo" onclick="creerCarte(lectPts)">Coordonnées de points</button>
+					<button class="btnExo" onclick="creerCarte(coeffDir)">Calcul de pente</button>
+					<button class="btnExo" onclick="creerCarte(lectVec)">Coordonnées de vecteurs</button>
+					<button class="btnExo" onclick="creerCarte(lectCarre)">Lecture graphique \(x^2\)</button>
 				</div>
 			</div>
 			<div>
 				Nombre de cartes : <span id="compte"></span>
 				<button id="btnImpr" class="btn-small" onclick="imprimer()">Imprimer</button>
 				<button id="btnReponses" class="btn-small btn-warning-outline" onclick="togReponses()">Voir les réponses</button>
-				<button id="btnDup" class="btn-small btn-success-outline" onclick="dupCarte()">Dupliquer</button>
-				<button id="btnDupTout" class="btn-small btn-success-outline" onclick="dupTout()">Tout dupliquer</button>
+				<button id="btnDup" class="btn-small btn-success-outline" onclick="dupCarte()">Dupliquer la dernière carte</button>
 				<button class="btn-small btn-danger-outline" onclick="supprCarte()">Supprimer</button>
 				<button class="btn-small btn-danger-outline" onclick="supprTout()">Tout supprimer</button>
 			</div>
 		</div>
 		<div class="row">
 			
-			<div id="cartes" class="col"></div>
-			<div id="dos" class="col collapse"></div>
+			<div id="cartes" class="col"><div id="divPage0"></div><div id="divPageDos0" class="page collapse"></div></div>
 		</div>
 	</body>
 	<script type="text/javascript" src="script.js"></script>

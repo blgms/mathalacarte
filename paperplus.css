@@ -81,7 +81,6 @@
 @media print {
 	body {
 		display: block;
-		margin: 0 auto;
 		width: 18.5cm;
 		margin: 0 auto!important;
     }
@@ -95,7 +94,6 @@
 	#cartes {
 		width: fit-content;
 		margin-left: auto; margin-right: auto;
-		page-break-after: always;
 	}
 	.carte {
 		float: left;
@@ -103,9 +101,12 @@
 	#dos {
 		width: fit-content;
 		margin-left: auto; margin-right: auto;
-		page-break-before: always;
 	}
 	.dos {
 		float: right;
+	}
+	.page {
+		padding-top: 0.6cm;
+		page-break-before: always!important;
 	}
 }

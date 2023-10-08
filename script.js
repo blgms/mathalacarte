@@ -8,60 +8,52 @@ MathJax = {
 };
 
 var idCarte = 0;
+var idPage = 0;
 document.getElementById('compte').innerHTML = idCarte;
 
 function compteur(n) {
 	idCarte += n;
+	//gestion compteur et boutons
 	document.getElementById('compte').innerHTML = idCarte;
-	if (idCarte > 4) {
-		document.getElementById("btnDupTout").disabled = true;
-	} else {
-		document.getElementById("btnDupTout").disabled = false;
-	}
-	if (idCarte > 8) {
-		let a = document.getElementsByClassName("btnExo");
-		for (i in a) {
-			a[i].disabled = true;
+	//gestion des pages
+	if (idPage != Math.floor(idCarte/9)) {
+		idPage = Math.floor(idCarte/9);
+		if (n < 0) {
+			for (i=idPage+1 ; i<document.getElementById("cartes").children.length/2 ; i++) {
+				document.getElementById("divPage"+i).remove();
+				document.getElementById("divPageDos"+i).remove();
+			}
+		} else {
+			document.getElementById('cartes').innerHTML += "<div id='divPage"+idPage+"'></div><div id='divPageDos"+idPage+"' class='collapse'></div>";
 		}
-		document.getElementById("btnDup").disabled = true;
-	} else if ((idCarte > 7 && n < 0) || (n < -1)) {
-		let a = document.getElementsByClassName("btnExo");
-		for (i in a) {
-			a[i].disabled = false;
-		}
-		document.getElementById("btnDup").disabled = false;
 	}
+		if (idPage > 0) {
+			if (document.getElementById("divPage"+idPage).children.length == 0) { document.getElementById("divPage"+idPage).classList.remove('page'); document.getElementById("divPageDos"+idPage).classList.remove('page'); }
+			else { document.getElementById("divPage"+idPage).classList.add('page'); document.getElementById("divPageDos"+idPage).classList.add('page'); }
+		}
+	
+	//
 	MathJax.startup.defaultReady();
 }
 
 function creerCarte(exercice,id) {
-	document.getElementById('cartes').innerHTML += "<div id='carte"+idCarte+"' class='sm-2 carte'><div id='titre"+idCarte+"' class='titre'></div><div id='consigne"+idCarte+"' class='text-secondary consigne'></div><div id='question"+idCarte+"' class='centre question'></div></div>";
+	document.getElementById("divPage"+idPage).innerHTML += "<div id='carte"+idCarte+"' class='sm-2 carte'><div id='titre"+idCarte+"' class='titre'></div><div id='consigne"+idCarte+"' class='text-secondary consigne'></div><div id='question"+idCarte+"' class='centre question'></div></div>";
 	let infos = exercice(id) ;
 	document.getElementById("titre"+idCarte).innerHTML += infos[0];
 	document.getElementById("consigne"+idCarte).innerHTML += infos[1];
 	document.getElementById("question"+idCarte).innerHTML += infos[2];
-	document.getElementById('dos').innerHTML += "<div id='dos"+idCarte+"' class='sm-2 dos'><div class='titre'>"+infos[0]+"</div><div class='consigne'>Réponse :</div><div id='reponse"+idCarte+"' class='text-success centre reponse'>"+infos[3]+"</div></div>";
+	document.getElementById("divPageDos"+idPage).innerHTML += "<div id='dos"+idCarte+"' class='sm-2 dos'><div class='titre'>"+infos[0]+"</div><div class='consigne'>Réponse :</div><div id='reponse"+idCarte+"' class='text-success centre reponse'>"+infos[3]+"</div></div>";
 	compteur(1);
 }
 
 function dupCarte() {
-	let str1 = document.getElementById('cartes').lastChild.innerHTML;
-	let str2 = document.getElementById("dos").lastChild.innerHTML;
-	document.getElementById('cartes').innerHTML += "<div id='carte"+idCarte+"' class='sm-2 border-dashed carte'>"+str1+"</div>"
-	document.getElementById('dos').innerHTML += "<div id='dos"+idCarte+"' class='sm-2 border-dashed dos'>"+str2+"</div>";
+	let page;
+	if (idPage > 0 && document.getElementById("divPage"+idPage).children.length == 0) { page = 1; } else { page = 0; }
+	let str1 = document.getElementById("divPage"+(idPage-page)).lastChild.innerHTML;
+	let str2 = document.getElementById("divPageDos"+(idPage-page)).lastChild.innerHTML;
+	document.getElementById("divPage"+idPage).innerHTML += "<div id='carte"+idCarte+"' class='sm-2 border-dashed carte'>"+str1+"</div>"
+	document.getElementById("divPageDos"+idPage).innerHTML += "<div id='dos"+idCarte+"' class='sm-2 dos'>"+str2+"</div>";
 	compteur(1);
-}
-
-function dupTout() {
-	for (i=0; i<idCarte; i++) {
-		let j=i+idCarte
-		let str1 = document.getElementById("carte"+i).innerHTML;
-		let str2 = document.getElementById("dos"+i).innerHTML;
-		document.getElementById('cartes').innerHTML += "<div id='carte"+j+"' class='sm-2 border-dashed carte'>"+str1+"</div>";
-		document.getElementById('dos').innerHTML += "<div id='dos"+j+"' class='sm-2 border-dashed dos'>"+str2+"</div>";
-		
-	}
-	compteur(idCarte);
 }
 
 function supprCarte() {
@@ -73,17 +65,18 @@ function supprCarte() {
 }
 
 function supprTout() {
-	document.getElementById('cartes').innerHTML = "";
-	document.getElementById('dos').innerHTML = "";
+	document.getElementById('cartes').innerHTML = "<div id='divPage0'></div><div id='divPageDos0' class='page collapse'></div>";
 	compteur(-idCarte);
 }
 
 function togReponses() {
 	document.getElementById("btnReponses").classList.toggle('btn-warning');
 	document.getElementById("btnReponses").classList.toggle('btn-warning-outline');
-	document.getElementById("cartes").classList.toggle('collapse');
-	document.getElementById("dos").classList.toggle('collapse');
+	for (let i=0 ; i<=idPage ; i++) {
+		document.getElementById("divPage"+i).classList.toggle('collapse');
+		document.getElementById("divPageDos"+i).classList.toggle('collapse');
 	}
+}
 
 function imprimer() {
 	if (idCarte < 1) { alert("Aucune carte créée !"); } else { print();}
