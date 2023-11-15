@@ -18,6 +18,10 @@
 	}
 }
 
+pre {
+	font-size: small;
+}
+
 #btnsExo div {
 	display: inline;
 	padding-right: 30px;

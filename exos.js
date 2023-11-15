@@ -77,7 +77,7 @@ function scienti() {
 	}
 	question += "</div>";
 	reponse += "</div>";
-	return ["Nombres",consigne,question,reponse];
+	return ["Écrit. scientifique",consigne,question,reponse];
 }
 
 //PASSER EN ECRITURE DECIMALE
@@ -106,7 +106,7 @@ function scientideci() {
 		reponse += "<div>\\("+pointVirg(numch.toString())+"\\)</div>";
 	}
 	question += "</div>";
-	return ["Nombres",consigne,question,reponse];
+	return ["Écrit. scientifique",consigne,question,reponse];
 }
 
 //CALCUL MENTAL
@@ -125,7 +125,7 @@ function tablesmulti() {
 	}
 	question += "</div>";
 	reponse += "</div>";
-	return ["Nombres",consigne,question,reponse];
+	return ["Calcul",consigne,question,reponse];
 }
 
 //PUISSANCES DE 10
@@ -150,7 +150,7 @@ function puiss10() {
 	}
 	question += "</div>";
 	reponse += "</div>";
-	return ["Nombres",consigne,question,reponse];
+	return ["Calcul",consigne,question,reponse];
 }
 
 //UNITES
@@ -504,33 +504,31 @@ function pythagore(exo) {
 //REPERAGE
 function lectPts() {
 	let pts = [
-		[randint(-8,8)/2, randint(-8,8)/2],
-		[randint(-8,8)/2, randint(-8,8)/2],
-		[randint(-8,8)/2, randint(-8,8)/2]
+		[randint(-6,6)/2, randint(-6,6)/2],
+		[randint(-6,6)/2, randint(-6,6)/2]
 	];
 	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
-	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-5, 5, 5, -5], axis:true, keepaspectratio:true, showCopyright:false, shownavigation:false});
+	let board = graphique([-3.5, 3.5, 3.5, -3.5]);
 	let cerise = {
 			strokeColor: '#901B77',
 			fillColor: '#CA147A',
 			size: '1'
 		},
 		A = board.create('point', [pts[0][0],pts[0][1]], cerise),
-		B = board.create('point', [pts[1][0],pts[1][1]], cerise),
-		C = board.create('point', [pts[2][0],pts[2][1]], cerise);
-	let consigne = "Donner les coordonnées des points \\(A\\), \\(B\\) et \\(C\\)."
-	let reponse = "<div class='grid nombres reponse'>\\(A("+pointVirg(pts[0][0].toString())+";"+pointVirg(pts[0][1].toString())+")\\)<br>\\(B("+pointVirg(pts[1][0].toString())+";"+pointVirg(pts[1][1].toString())+")\\)<br>\\(C("+pointVirg(pts[2][0].toString())+";"+pointVirg(pts[2][1].toString())+")\\)"
+		B = board.create('point', [pts[1][0],pts[1][1]], cerise);
+	let consigne = "Donner les coordonnées des points \\(A\\) et \\(B\\)."
+	let reponse = "<div class='grid nombres reponse'>\\(A("+pointVirg(pts[0][0].toString())+";"+pointVirg(pts[0][1].toString())+")\\)<br>\\(B("+pointVirg(pts[1][0].toString())+";"+pointVirg(pts[1][1].toString())+")\\)";
 	return ["Repérage",consigne,"",reponse];
 }
 
 function coeffDir() {
 	let pts = [
-		[randint(0,3), randint(-4,4)],
-		[randint(4,7), randint(-4,4)]
+		[randint(0,2), randint(-3,3)],
+		[randint(3,5), randint(-3,3)]
 	];
 	while (pts[1][0] == pts[0][0]) { pts[1][0] = randint(-4,4); }
 	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
-	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-1, 5, 9, -5], axis:true, keepaspectratio:true, showCopyright:false, shownavigation:false});
+	let board = graphique([-1, 3.5, 6, -3.5]);
 	let cerise = {
 			strokeColor: '#901B77',
 			fillColor: '#CA147A',
@@ -548,24 +546,20 @@ function coeffDir() {
 function lectVec() {
 	let pts = [
 		[randint(-4,4), randint(-4,4)],
-		[randint(-4,4), randint(-4,4)],
 		[randint(-4,4), randint(-4,4)]
 	];
 	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
-	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-5, 5, 5, -5], axis:true, keepaspectratio:true, showCopyright:false, shownavigation:false});
+	let board = graphique([-5, 5, 5, -5]);
 	let cerise = {
 			strokeColor: '#901B77',
 			fillColor: '#CA147A',
 			size: '1'
 		},
 		A = board.create('point', [pts[0][0],pts[0][1]], cerise),
-		B = board.create('point', [pts[1][0],pts[1][1]], cerise),
-		C = board.create('point', [pts[2][0],pts[2][1]], cerise);
+		B = board.create('point', [pts[1][0],pts[1][1]], cerise);
 	var vAB = board.create('line',[[pts[0][0],pts[0][1]], [pts[1][0],pts[1][1]] ],{straightFirst:false, straightLast:false, lastArrow:true});
-	var vBC = board.create('line',[[pts[1][0],pts[1][1]], [pts[2][0],pts[2][1]] ],{straightFirst:false, straightLast:false, lastArrow:true, strokeColor:'red'});
-	var vAC = board.create('line',[[pts[0][0],pts[0][1]], [pts[2][0],pts[2][1]] ],{straightFirst:false, straightLast:false, lastArrow:true, strokeColor:'green'});
-	let consigne = "Donner les coordonnées des vecteurs \\( \\vec{AB} \\), \\( \\vec{BC} \\) et \\( \\vec{AC} \\)."
-	let reponse = "<div class='grid nombres reponse'>\\( \\vec{AB} = \\binom{"+pointVirg((pts[1][0]-pts[0][0]).toString())+"}{"+pointVirg((pts[1][1]-pts[0][1]).toString())+"} \\)<br>\\( \\vec{BC} = \\binom{"+pointVirg((pts[2][0]-pts[1][0]).toString())+"}{"+pointVirg((pts[2][1]-pts[1][1]).toString())+"}\\)<br>\\( \\vec{AC} = \\binom{"+pointVirg((pts[2][0]-pts[0][0]).toString())+"}{"+pointVirg((pts[2][1]-pts[0][1]).toString())+"} \\)"
+	let consigne = "Donner les coordonnées du vecteur \\( \\vec{AB} \\).";
+	let reponse = "<div class='grid nombres reponse'>\\( \\vec{AB} = \\binom{"+pointVirg((pts[1][0]-pts[0][0]).toString())+"}{"+pointVirg((pts[1][1]-pts[0][1]).toString())+"} \\)";
 	return ["Vecteurs",consigne,"",reponse];
 }
 
@@ -582,4 +576,26 @@ function lectCarre() {
 	let consigne = "Donner l'image par la fonction \\(f\\) représentée ci-dessous des nombres \\("+pointVirg(ptsx[0].toString())+"\\), \\("+pointVirg(ptsx[1].toString())+"\\) et \\("+pointVirg(ptsx[2].toString())+"\\).";
 	let reponse = "<div class='grid nombres reponse'>\\(f("+pointVirg(ptsx[0].toString())+")="+pointVirg(ptsy[0].toString())+"\\)<br>\\(f("+pointVirg(ptsx[1].toString())+")="+pointVirg(ptsy[1].toString())+"\\)<br>\\(f("+pointVirg(ptsx[2].toString())+")="+pointVirg(ptsy[2].toString())+"\\)</div>"
 	return ["Fonctions",consigne,"",reponse];
+}
+
+
+//SUITES
+function verifSuiteA() {
+	let consigne = "Indiquer si ces termes font partie d'une suite arithmétique, et si oui, indiquer sa raison.";
+	let n = randint(1,5);
+	let u1 = randint(-20,20);
+	let r = randint(2,20)*randoppose();
+	let a = randint(0,1);
+	let question = "<div class='grid nombres'>\\(u_"+n+"="+u1+"\\)<br>\\(u_"+(n+1)+"="+(u1+r+a*randint(-5,5))+"\\)<br>\\(u_"+(n+2)+"="+(u1+2*r+a*randint(-5,5))+"\\)</div>";
+	let reponse = (a === 1) ? "La suite n'est pas arithmétique.":"La suite est arithmétique de raison "+r+".";
+	return ["Suites",consigne,question,reponse];
+}
+
+//PYTHON
+function pythCalc() {
+	let a = randint(0,10), b = randint(0,10), calc = randint(0,2);
+	let calcs = ["+","-","*"];
+	let consigne = "Voici une fonction Python. <pre><code>def calcul(x,y): <br>&emsp;&emsp;return x"+calcs[calc]+"y	</code></pre> Quel sera le retour de la commande <code>calcul("+a+","+b+")</code> ?";
+	let reponse = eval(a+calcs[calc]+b);
+	return ["Python",consigne,"",reponse];
 }
