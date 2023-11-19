@@ -313,54 +313,42 @@ function echelles() {
 //SIMPLIFICATION FRACTIONS
 function fracsimp() {
 	let consigne = "<div>Si c'est possible, simplifier :</div>";
-	let question = "<div class='grid nombres'>";
-	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=0;j<3;j++) {
-		let nbs = [];
-		let a = randint(1,5);
-		for (let i=0;i<2;i++) {
-			nbs[i]=randint(1,20)*a;
-		}
-		let fracres = simpl(nbs[0],nbs[1]);
-		/*création des chaînes*/
-		let frac = chainefrac(nbs);
-		let resultat = chainefrac(fracres);
-		question += "<div>\\("+frac+"\\)</div>";
-		reponse += "<div>\\("+frac+"="+resultat+"\\)</div>";
+	let nbs = [];
+	let a = randint(1,5);
+	for (let i=0;i<2;i++) {
+		nbs[i]=randint(1,20)*a;
 	}
-	question += "</div>";
-	reponse += "</div>";
+	let fracres = simpl(nbs[0],nbs[1]);
+	/*création des chaînes*/
+	let frac = chainefrac(nbs);
+	let resultat = chainefrac(fracres);
+	let question = "<div class='grid nombres'>\\("+frac+"\\)</div>";
+	let reponse = "<div class='grid nombres reponse'>\\("+frac+"="+resultat+"\\)</div>";
 	return ["Fractions",consigne,question,reponse];
 }
 
 //CALCULS FRACTIONS
 function fraccalc() {
 	let consigne = "<div>Calculer :</div>"
-	let question = "<div class='grid nombres'>";
-	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=0;j<3;j++) {
-		let nbs = [];
-		for (let i=0;i<4;i++) {
-			nbs[i]=randint(1,10);
-		}
-		/*choix aléatoire de l'opération*/
-		let ops = ["+","-","\\times","\\div"];
-		let nbop = randint(0,3);
-		let op = ops[nbop];
-		/*calcul du dénominateur du résultat*/
-		let den = [ppcm(nbs[1],nbs[3]) , ppcm(nbs[1],nbs[3]) , nbs[1]*nbs[3], nbs[1]*nbs[2]];
-		/*calcul du numérateur du résultat*/
-		let num = [nbs[0]*den[nbop]/nbs[1]+nbs[2]*den[nbop]/nbs[3] , nbs[0]*den[nbop]/nbs[1]-nbs[2]*den[nbop]/nbs[3] , nbs[0]*nbs[2] , nbs[0]*nbs[3]];
-		/*simplification de la fraction résultat*/
-		let fracres = simpl(num[nbop],den[nbop]);
-		/*création des chaînes*/
-		let calcul = chainefrac([nbs[0],nbs[1]])+op+chainefrac([nbs[2],nbs[3]]);
-		let resultat = chainefrac(fracres);
-		question += "<div>\\("+calcul+"\\)</div>";
-		reponse += "<div>\\("+calcul+"="+resultat+"\\)</div>";
+	let nbs = [];
+	for (let i=0;i<4;i++) {
+		nbs[i]=randint(1,10);
 	}
-	question += "</div>";
-	reponse += "</div>";
+	/*choix aléatoire de l'opération*/
+	let ops = ["+","-","\\times","\\div"];
+	let nbop = randint(0,3);
+	let op = ops[nbop];
+	/*calcul du dénominateur du résultat*/
+	let den = [ppcm(nbs[1],nbs[3]) , ppcm(nbs[1],nbs[3]) , nbs[1]*nbs[3], nbs[1]*nbs[2]];
+	/*calcul du numérateur du résultat*/
+	let num = [nbs[0]*den[nbop]/nbs[1]+nbs[2]*den[nbop]/nbs[3] , nbs[0]*den[nbop]/nbs[1]-nbs[2]*den[nbop]/nbs[3] , nbs[0]*nbs[2] , nbs[0]*nbs[3]];
+	/*simplification de la fraction résultat*/
+	let fracres = simpl(num[nbop],den[nbop]);
+	/*création des chaînes*/
+	let calcul = chainefrac([nbs[0],nbs[1]])+op+chainefrac([nbs[2],nbs[3]]);
+	let resultat = chainefrac(fracres);
+	let question = "<div class='grid nombres'>\\("+calcul+"\\)</div>";
+	let reponse = "<div class='grid nombres'>\\("+calcul+"="+resultat+"\\)</div>";
 	return ["Fractions",consigne,question,reponse];
 }
 
@@ -571,11 +559,25 @@ function lectCarre() {
 	while (ptsx[2] == ptsx[0] || ptsx[2] == ptsx[1]) { ptsx[2] = randint(-5,5)/2; }
 	let ptsy = ptsx.map((x) => x**2);
 	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
-	let board = JXG.JSXGraph.initBoard("box"+idCarte, {boundingbox: [-4, 7, 4, -1], axis:true, keepaspectratio:true, showCopyright:false, shownavigation:false});
+	let board = graphique([-4, 7, 4, -1]);
 	let graph = board.create('functiongraph',[function(x){ return x*x; },-5,5]);
 	let consigne = "Donner l'image par la fonction \\(f\\) représentée ci-dessous des nombres \\("+pointVirg(ptsx[0].toString())+"\\), \\("+pointVirg(ptsx[1].toString())+"\\) et \\("+pointVirg(ptsx[2].toString())+"\\).";
 	let reponse = "<div class='grid nombres reponse'>\\(f("+pointVirg(ptsx[0].toString())+")="+pointVirg(ptsy[0].toString())+"\\)<br>\\(f("+pointVirg(ptsx[1].toString())+")="+pointVirg(ptsy[1].toString())+"\\)<br>\\(f("+pointVirg(ptsx[2].toString())+")="+pointVirg(ptsy[2].toString())+"\\)</div>"
 	return ["Fonctions",consigne,"",reponse];
+}
+
+
+//LOGARITHME
+function calcLog() {
+	let k = randint(1,4)*randoppose();
+	let n = randint(2,15);
+	let n2 = n*10**k;
+	let logn = Math.round(Math.log10(n)*10)/10;
+	let logn2 = Math.round(Math.log10(n2)*10)/10;
+	let consigne = "Sachant que \\(log({"+n+"}) \\simeq"+pointVirg(logn.toString())+"\\) donner sans calculatrice la valeur de";
+	let question = "<div class='grid nombres'>\\(log("+pointVirg(n2.toString())+")\\)</div>";
+	let reponse = "<div class='grid nombres reponse'>\\(log("+pointVirg(n2.toString())+") \\simeq"+pointVirg(logn2.toString())+"\\)</div>";
+	return ["Logarithme",consigne,question,reponse];
 }
 
 
@@ -587,8 +589,18 @@ function verifSuiteA() {
 	let r = randint(2,20)*randoppose();
 	let a = randint(0,1);
 	let question = "<div class='grid nombres'>\\(u_"+n+"="+u1+"\\)<br>\\(u_"+(n+1)+"="+(u1+r+a*randint(-5,5))+"\\)<br>\\(u_"+(n+2)+"="+(u1+2*r+a*randint(-5,5))+"\\)</div>";
-	let reponse = (a === 1) ? "La suite n'est pas arithmétique.":"La suite est arithmétique de raison "+r+".";
-	return ["Suites",consigne,question,reponse];
+	let reponse = (a === 1) ? "<div class='reponse'>La suite n'est pas arithmétique.</div>":"<div class='reponse'>La suite est arithmétique de raison "+r+".</div>";
+	return ["Suites arithm.",consigne,question,reponse];
+}
+
+function calcTermeSuiteA() {
+	let n = randint(10,20);
+	let u1 = randint(-20,20);
+	let r = randint(2,20)*randoppose();
+	let consigne = "Calculer le terme de rang \\(n="+n+"\\) de la suite arithmétique définie par :";
+	let question = "<div class='grid nombres'>\\(u_1="+u1+"\\)<br>\\(r="+r+"\\)</div>";
+	let reponse = "<div class='grid nombres reponse'>\\(u_{"+n+"}="+(u1+(n-1)*r)+"\\)</div>";
+	return ["Suites arithm.",consigne,question,reponse];
 }
 
 //PYTHON
