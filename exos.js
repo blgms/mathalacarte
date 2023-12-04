@@ -282,6 +282,17 @@ function quatprop() {
 	return ["Proportionnalité",consigne,question,reponse];
 }
 
+//POURCENTAGES
+//Taux d'augmentation
+function tauxPourcent() {
+	let consigne = "<div>Retrouver le coefficient multiplicateur associé à une</div>";
+	let a = randoppose();
+	let p = randint(0,90);
+	let question = (a===1) ? "<div class='nombres'>augmentation de \\("+a+" %\\).</div>" : "<div class='nombres'>diminution de \\("+a+" %\\).</div>"
+	let reponse = pointVirg((1+a*p/100).toString());
+	return ["Pourcentages",consigne,question,reponse];
+}
+
 /*
  * //ECHELLES
 function echelles() {
