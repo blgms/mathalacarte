@@ -288,8 +288,8 @@ function tauxPourcent() {
 	let consigne = "<div>Retrouver le coefficient multiplicateur associé à une</div>";
 	let a = randoppose();
 	let p = randint(0,90);
-	let question = (a===1) ? "<div class='nombres'>augmentation de \\("+a+" %\\).</div>" : "<div class='nombres'>diminution de \\("+a+" %\\).</div>"
-	let reponse = pointVirg((1+a*p/100).toString());
+	let question = (a===1) ? "<div class='nombres'>augmentation de \\("+p+" %\\).</div>" : "<div class='nombres'>diminution de \\("+p+" %\\).</div>"
+	let reponse = "<div class='reponse nombres'>\\("+pointVirg(((100+a*p)/100).toString())+"\\)</div>";
 	return ["Pourcentages",consigne,question,reponse];
 }
 
