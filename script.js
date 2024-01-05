@@ -9,6 +9,7 @@ MathJax = {
 
 var idCarte = 0;
 var idPage = 0;
+var repAff = false;
 document.getElementById('compte').innerHTML = idCarte;
 
 function compteur(n) {
@@ -25,6 +26,10 @@ function compteur(n) {
 			}
 		} else {
 			document.getElementById('cartes').innerHTML += "<div id='divPage"+idPage+"'></div><div id='divPageDos"+idPage+"' class='collapse'></div>";
+			if (repAff==true) {
+				document.getElementById("divPage"+idPage).classList.toggle("collapse");
+				document.getElementById("divPageDos"+idPage).classList.toggle('collapse');
+			}
 		}
 	}
 		if (idPage > 0) {
@@ -64,12 +69,8 @@ function supprCarte() {
 	}
 }
 
-function supprTout() {
-	document.getElementById('cartes').innerHTML = "<div id='divPage0'></div><div id='divPageDos0' class='page collapse'></div>";
-	compteur(-idCarte);
-}
-
 function togReponses() {
+	repAff = !repAff;
 	document.getElementById("btnReponses").classList.toggle('btn-warning');
 	document.getElementById("btnReponses").classList.toggle('btn-warning-outline');
 	for (let i=0 ; i<=idPage ; i++) {

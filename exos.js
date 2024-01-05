@@ -133,20 +133,25 @@ function puiss10() {
 	let consigne = "Calculer <b>de tête</b> :";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
-	for (let j=00;j<3;j++) {
-		let num = Math.floor(Math.random()*1000);
-		let coeff = 10**Math.ceil(Math.random()*3);
-		let op = Math.round(Math.random());
+	for (let j=0;j<3;j++) {
+		let num = randint(1,1000);
+		let cf1 = 10**randint(0,2);
+		let a = num/cf1;
+		let puiss = randint(1,3);
+		let cf2 = 10**puiss
+		let signPuiss = randoppose();
+		let b = 10**(puiss*signPuiss);				
 		let quest,rep;
+		let op = randint(0,1);
 		if (op==0) {
-			quest = chainefrac([num,coeff]);
-			rep = num/coeff;
+			quest = chainefrac([a,b]);
+			rep = (signPuiss===1)? (num/b*cf2)/(cf1*cf2) : (num*cf2)/cf1;
 		} else {
-			quest = num+"\\times"+coeff;
-			rep = num*coeff;
+			quest = a+"\\times"+b;
+			rep = (signPuiss===1)? (num*b)/cf1 : num/(cf1*cf2);
 		}
-		question += "<div>\\("+quest+"\\)</div>";
-		reponse += "<div>\\("+quest+"="+pointVirg(rep.toString())+"\\)</div>";
+		question += "<div>\\("+pointVirg(quest)+"\\)</div>";
+		reponse += "<div>\\("+pointVirg(rep.toString())+"\\)</div>";
 	}
 	question += "</div>";
 	reponse += "</div>";
@@ -243,7 +248,7 @@ function durees(exo) {
 function tabprop() {
 	let consigne = "<div>Indiquer si les grandeurs ci-dessous sont proportionnelles.</div>";
 	let question = "", reponse = "";
-	let prop = ["C'est","Ce n'est <b>pas</b>"];
+	let prop = ["<b>sont</b>","<b>ne sont pas</b>"];
 	let on = randint(0,1);
 	let nbs = [];
 	let coeff = randint(1,10);
@@ -259,7 +264,27 @@ function tabprop() {
 	}
 	let tabl = "<table class='proportion'><tr><th>A</th><td>"+nbs[0]+"</td><td>"+nbs[1]+"</td><td>"+nbs[2]+"</td></tr><tr><th>B</th><td>"+nbs[3]+"</td><td>"+nbs[4]+"</td><td>"+nbs[5]+"</td></tr></table>";
 	question += tabl;
-	reponse += tabl+"<div class='reponse'>"+prop[on]+" un tableau de proportionnalité.</div>";
+	reponse += "<div class='reponse'>Les deux grandeurs "+prop[on]+" proportionnelles.</div>";
+	return ["Proportionnalité",consigne,question,reponse];
+}
+
+//TABLEAUX DE PROPORTIONNALITE
+function tabPropCoeff() {
+	let consigne = "<div>Donner le coefficient de proportionnalité du tableau suivant.</div>";
+	let question = "", reponse = "";
+	let on = randint(0,1);
+	let nbs = [];
+	let coeff = randint(1,10);
+	for (let i=0;i<3;i++) {
+		nbs[i] = randint(1,100);
+		nbs[3+i] = nbs[i]*coeff;
+	}
+	for (let i=0;i<6;i++) {
+		nbs[i] = "\\("+nbs[i]+"\\)";
+	}
+	let tabl = "<table class='proportion'><tr><th>A</th><td>"+nbs[0]+"</td><td>"+nbs[1]+"</td><td>"+nbs[2]+"</td></tr><tr><th>B</th><td>"+nbs[3]+"</td><td>"+nbs[4]+"</td><td>"+nbs[5]+"</td></tr></table>";
+	question += tabl;
+	reponse += "<div class='reponse'>Le coefficient de proportionnalité est égal à \\("+coeff+"\\).</div>";
 	return ["Proportionnalité",consigne,question,reponse];
 }
 
@@ -278,11 +303,27 @@ function quatprop() {
 	nbs[quellevaleur] = "x";
 	let tabl = "<table class='proportion'><tr><th>A</th><td>\\("+nbs[0]+"\\)</td><td>\\("+nbs[1]+"\\)</td></tr><tr><th>B</th><td>\\("+nbs[2]+"\\)</td><td>\\("+nbs[3]+"\\)</td></tr></table>";
 	question += tabl;
-	reponse += tabl+"<div class='reponse nombres'>\\(x="+rep+"\\)</div>";
+	reponse += "<div class='reponse nombres'>\\(x="+rep+"\\)</div>";
 	return ["Proportionnalité",consigne,question,reponse];
 }
 
 //POURCENTAGES
+//Calcul de 10%, 20%...
+function calcPourcent() {
+	let L = [15, 20, 25, 30, 35, 40, 45];
+	let p = [10, 5, L[randint(0,L.length-1)]];
+	let consigne = "Effectuer les calculs suivants :";
+	let a = randint(0,100)*10;
+	let q = "", r = "";
+	for (i in p) {
+		q += "<div>"+p[i].toString()+"% de "+a.toString()+"</div>";
+		r += "<div>"+(p[i]*a/100)+"</div>";
+	}
+	let question = "<div class='nombres'>"+q+"</div>"
+	let reponse = "<div class='reponse nombres'>"+r+"</div>";
+	return ["Pourcentages",consigne,question,reponse];
+}
+
 //Taux d'augmentation
 function tauxPourcent() {
 	let consigne = "<div>Retrouver le coefficient multiplicateur associé à une</div>";
@@ -319,7 +360,70 @@ function echelles() {
 */
 
 //FRACTIONS
+//FRACTIONS vers DECIMAL
+function fracdec() {
+	let consigne = "<div>Donner la forme décimale des fractions suivantes :</div>";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
+	let La = [1, 2, 3, 4, 5, 10, 20, 25];
+	let Lb = [2, 4, 5, 10, 20, 25, 50, 100];
+	for (i=0 ; i<3 ; i++) {
+		let a = La[randint(0,La.length-1)], b = Lb[randint(0,Lb.length-1)];
+		let frac = chainefrac([a,b]);
+		question += "<div>\\("+frac+"\\)</div>";
+		reponse += "<div>\\("+frac+"="+pointVirg((a/b).toString())+"\\)</div>";
+	}
+	question += "</div>";
+	reponse += "</div>";
+	return ["Fractions",consigne,question,reponse];
+}
+
+//DECIMAL vers FRACTION
+function decfrac() {
+	let consigne = "<div>Écrire ces nombres sous forme de fractions irréductibles :</div>";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
+	let La = [1, 2, 3, 4, 5, 10, 20, 25];
+	let Lb = [2, 4, 5, 10, 20, 25, 50, 100];
+	for (i=0 ; i<3 ; i++) {
+		let a = 1, b = 1;
+		while (a == b || Number.isInteger(a/b)) {
+			a = La[randint(0,La.length-1)], b = Lb[randint(0,Lb.length-1)];
+		}
+		let nbs = simpl(a,b);		
+		let frac = chainefrac(nbs);
+		question += "<div>\\("+pointVirg((a/b).toString())+"\\)</div>";
+		reponse += "<div>\\("+pointVirg((a/b).toString())+"="+frac+"\\)</div>";
+	}
+	question += "</div>";
+	reponse += "</div>";
+	return ["Fractions",consigne,question,reponse];
+}
+
 //COMPARAISON DE FRACTIONS
+function fraccomp() {
+	let consigne = "Compléter avec les symboles \\(<\\) ou \\(>\\) :";
+	let question = "<div class='grid nombres'>";
+	let reponse = "<div class='grid nombres reponse'>";
+	let La = [1, 2, 3, 4, 5, 10, 20, 25];
+	let Lb = [2, 4, 5, 10, 20, 25];
+	for (i=0 ; i<3 ; i++) {
+		let a = 1, b = 1, c = 1, d = 1;
+		while (a == b || Number.isInteger(a/b)) {
+			a = La[randint(0,La.length-1)], b = Lb[randint(0,Lb.length-1)];
+		}
+		while (c == d || Number.isInteger(c/d)) {
+			c = La[randint(0,La.length-1)], d = Lb[randint(0,Lb.length-1)];
+		}		
+		let frac1 = chainefrac([a,b]), frac2 = chainefrac([c,d]);
+		let r = (a/b < c/d)? "<" : ">";
+		question += "<div>\\("+frac1+"\\,\\,\\text{...}\\,\\,"+frac2+"\\)</div>";
+		reponse += "<div>\\("+frac1+"\\,\\,"+r+"\\,\\,"+frac2+"\\)</div>";
+	}
+	question += "</div>";
+	reponse += "</div>";
+	return ["Fractions",consigne,question,reponse];
+}
 
 //SIMPLIFICATION FRACTIONS
 function fracsimp() {
@@ -379,7 +483,7 @@ function statsCirc() {
 			highlightBySize:true,
 			highlightOnSector:true
 		});
-	return ["Stats","pouet","","lol"];
+	return ["Stats","test","","test"];
 }
 
 
@@ -534,7 +638,8 @@ function coeffDir() {
 			size: '1'
 		},
 		A = board.create('point', [pts[0][0],pts[0][1]], cerise),
-		B = board.create('point', [pts[1][0],pts[1][1]], cerise);
+		B = board.create('point', [pts[1][0],pts[1][1]], cerise),
+		d = board.create('line', [A, B], cerise);
 	let consigne = "Calculer la pente de la droite \\((AB)\\)."
 	let reponse = "<div class='grid nombres reponse'>\\( a="+ pointVirg( (Math.round(((pts[1][1]-pts[0][1])/(pts[1][0]-pts[0][0])*100))/100).toString() ) +" \\)"
 	return ["Repérage",consigne,"",reponse];
@@ -594,13 +699,13 @@ function calcLog() {
 
 //SUITES
 function verifSuiteA() {
-	let consigne = "Indiquer si ces termes font partie d'une suite arithmétique, et si oui, indiquer sa raison.";
+	let consigne = "Indiquer si ces termes font partie d'une suite arithmétique, et si oui, indiquer sa raison \\(r\\).";
 	let n = randint(1,5);
 	let u1 = randint(-20,20);
 	let r = randint(2,20)*randoppose();
 	let a = randint(0,1);
 	let question = "<div class='grid nombres'>\\(u_"+n+"="+u1+"\\)<br>\\(u_"+(n+1)+"="+(u1+r+a*randint(-5,5))+"\\)<br>\\(u_"+(n+2)+"="+(u1+2*r+a*randint(-5,5))+"\\)</div>";
-	let reponse = (a === 1) ? "<div class='reponse'>La suite n'est pas arithmétique.</div>":"<div class='reponse'>La suite est arithmétique de raison "+r+".</div>";
+	let reponse = (a === 1) ? "<div class='reponse'>La suite n'est pas arithmétique.</div>":"<div class='reponse'>La suite est arithmétique de raison \\(r="+r+"\\).</div>";
 	return ["Suites arithm.",consigne,question,reponse];
 }
 
@@ -612,6 +717,31 @@ function calcTermeSuiteA() {
 	let question = "<div class='grid nombres'>\\(u_1="+u1+"\\)<br>\\(r="+r+"\\)</div>";
 	let reponse = "<div class='grid nombres reponse'>\\(u_{"+n+"}="+(u1+(n-1)*r)+"\\)</div>";
 	return ["Suites arithm.",consigne,question,reponse];
+}
+
+function verifSuiteG() {
+	let consigne = "Indiquer si ces termes font partie d'une suite géométrique, et si oui, indiquer sa raison \\(q\\).";
+	let n = randint(1,5);
+	let u1 = randint(-20,20);
+	let L = [0.1, 0.25, 0.5, 1.5, 2, 2.5, 5, 10];
+	let q = L[randint(0,L.length-1)];
+	let a = randint(0,1);
+	let question = "<div class='grid nombres'>\\(u_"+n+"="+u1+"\\)<br>\\(u_"+(n+1)+"="+(u1*(q+a))+"\\)<br>\\(u_"+(n+2)+"="+(u1*(q+a)**2)+"\\)</div>";
+	let reponse = (a === 1) ? "<div class='reponse'>La suite n'est pas géométrique.</div>":"<div class='reponse'>La suite est géométrique de raison \\(q="+pointVirg(q.toString())+"\\).</div>";
+	return ["Suites géom.",consigne,question,reponse];
+}
+
+function calcTermeSuiteG() {
+	let n = randint(4,7);
+	let u1 = randint(1,20)*10;
+	let L = [-10, -4, -2, 1.5, 2, 2.5, 5, 10];
+	let q = L[randint(0,L.length-1)];
+	let qaff = (q>0)? q : 1/Math.abs(q);
+	let un = (q>0)? u1*(q**(n-1)) : u1/(Math.abs(q)**(n-1))
+	let consigne = "Calculer le terme de rang \\(n="+n+"\\) de la suite géométrique définie par :";
+	let question = "<div class='grid nombres'>\\(u_1="+u1+"\\)<br>\\(q="+pointVirg(qaff.toString())+"\\)</div>";
+	let reponse = "<div class='grid nombres reponse'>\\(u_{"+n+"}="+pointVirg(un.toString())+"\\)</div>";
+	return ["Suites géom.",consigne,question,reponse];
 }
 
 //PYTHON
