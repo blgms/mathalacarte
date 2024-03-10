@@ -268,7 +268,7 @@ function tabprop() {
 	return ["Proportionnalité",consigne,question,reponse];
 }
 
-//TABLEAUX DE PROPORTIONNALITE
+//COEFFICIENT DE PROPORTIONNALITE
 function tabPropCoeff() {
 	let consigne = "<div>Donner le coefficient de proportionnalité du tableau suivant.</div>";
 	let question = "", reponse = "";
@@ -317,10 +317,10 @@ function calcPourcent() {
 	let q = "", r = "";
 	for (i in p) {
 		q += "<div>"+p[i].toString()+"% de "+a.toString()+"</div>";
-		r += "<div>"+(p[i]*a/100)+"</div>";
+		r += "<div>\\("+pointVirg((p[i]*a/100).toString())+"\\)</div>";
 	}
 	let question = "<div class='nombres'>"+q+"</div>"
-	let reponse = "<div class='reponse nombres'>"+r+"</div>";
+	let reponse = "<div class='reponse nombres'>"+pointVirg(r.toString())+"</div>";
 	return ["Pourcentages",consigne,question,reponse];
 }
 
@@ -511,6 +511,30 @@ function equa1d(type) {
 }
 
 //EQUATIONS DU 2ND DEGRE
+//vérifier qu'une valeur est racine
+function equa2dVerif() {
+	let n=tripletsDxEnt(-5,5)[randint(0,40)];
+	let a=n[0],b=n[1],c=n[2];
+	let sol = n[3];
+	let na="",nb="",nc="";
+	if (a==-1) { na +="-"; } else if (a!=1) { na += a; }
+	if (b>0) { nb += "+"; }
+	if (b==-1) { nb +="-"; } else if (b!=1) { nb += b; }
+	if (c>0) { nc += "+"; }
+	nc += c;
+	let rep = randint(-1,1);
+	let x = sol+rep;
+	if (x == n[4]) {
+		x += rep;
+	}
+	let repstr = (rep==0)? " est" : " n'est pas";
+	let consigne = "<div>Vérifier si "+x+" est une racine du polynôme suivant :</div>";
+	let question = "<div class='nombres'>\\("+na+"x^2"+nb+"x"+nc+"\\)</div>";	
+	let reponse = "<div class='nombres reponse grid'>"+x+repstr+" une racine du polynôme.</div>";
+	return ["Équations 2nd deg.",consigne,question,reponse];
+}
+
+//trouver les racines
 function equa2d() {
 	let n=tripletsD(-5,5)[randint(0,151)];
 	let a=n[0],b=n[1],c=n[2];
@@ -534,7 +558,51 @@ function equa2d() {
 	let consigne = "<div>Indiquer les solutions de l'équation.</div>";
 	let question = "<div class='nombres'>\\("+na+"x^2"+nb+"x"+nc+"=0\\)</div>";	
 	let reponse = "<div class='nombres reponse grid'>"+sol+"</div>";
-	return ["Équations",consigne,question,reponse];
+	return ["Équations 2nd deg.",consigne,question,reponse];
+}
+
+//FONCTIONS
+//Calculer image - fn affine
+function calcImageAffine() {
+	let a=randint(-20,20), b=randint(-20,20);
+	let na="",nb="";
+	if (a==-1) { na +="-"; } else if (a!=1) { na += a; }
+	if (b>0 && a!=0) { nb += "+"; }
+	nb += b;
+	let fStr = "f(x)=";
+	if (a!=0) { fStr += na+"x"; }
+	if (b!=0) { fStr += nb; }
+	let xArr = [randint(-20,20), randint(-20,20), randint(-20,20)];
+	function f(x) {
+		return a*x + b;
+	}
+	let yArr = xArr.map((x) => f(x));
+	let consigne = "<div>Soit une fonction définie par :</div>";
+	let question = "<div class='nombres'>\\( "+fStr+" \\)</div><div class='text-secondary consigne'>Calculer f("+xArr[0]+"), f("+xArr[1]+") et f("+xArr[2]+").</div>";	
+	let reponse = "<div class='nombres reponse grid'><div>\\(f("+xArr[0]+")="+yArr[0]+"\\)</div><div>\\(f("+xArr[1]+")="+yArr[1]+"\\)</div><div>\\(f("+xArr[2]+")="+yArr[2]+"\\)</div></div>";
+	return ["Fonctions",consigne,question,reponse];
+}
+
+//Calculer image - fn 2nd degré
+function calcImage2Deg() {
+	let n=tripletsDxEnt(-5,5)[randint(0,40)];
+	let a=n[0],b=n[1],c=n[2];
+	let na="",nb="",nc="";
+	if (a==-1) { na +="-"; } else if (a!=1) { na += a; }
+	if (b>0) { nb += "+"; }
+	if (b==-1) { nb +="-"; } else if (b!=1) { nb += b; }
+	if (c>0) { nc += "+"; }
+	nc += c;
+	let fStr = "f(x)="+na+"x^2"+nb+"x"+nc;
+	let xArr = [randint(-20,20), randint(-20,20), randint(-20,20)];
+	function f(x) {
+		return a*x**2 + b*x + c;
+	}
+	let yArr = xArr.map((x) => f(x));
+	let consigne = "<div>Soit une fonction définie par :</div>";
+	let question = "<div class='nombres'>\\( \\class{mathSmall}{"+fStr+"} \\)</div><div class='text-secondary consigne'>Calculer f("+xArr[0]+"), f("+xArr[1]+") et f("+xArr[2]+").</div>";	
+	let reponse = "<div class='nombres reponse grid'><div>\\(f("+xArr[0]+")="+yArr[0]+"\\)</div><div>\\(f("+xArr[1]+")="+yArr[1]+"\\)</div><div>\\(f("+xArr[2]+")="+yArr[2]+"\\)</div></div>";
+	return ["Fonctions",consigne,question,reponse];
 }
 
 //PYTHAGORE
@@ -742,6 +810,22 @@ function calcTermeSuiteG() {
 	let question = "<div class='grid nombres'>\\(u_1="+u1+"\\)<br>\\(q="+pointVirg(qaff.toString())+"\\)</div>";
 	let reponse = "<div class='grid nombres reponse'>\\(u_{"+n+"}="+pointVirg(un.toString())+"\\)</div>";
 	return ["Suites géom.",consigne,question,reponse];
+}
+
+
+//PROBABILITES
+//Calculer probabilité dé
+function proba1De() {
+	let faces = [4, 6, 8, 10, 12, 20];
+	let N = faces[randint(0,faces.length-1)];
+	let n = randint(1,N);
+	let evts = ["un "+n, "un nombre pair", "un nombre impair", "un multiple de 3", "un multiple de 5", "plus de "+n, "moins de "+n ];
+	let probs = [[1,N], [1,2], [1,2], [Math.floor(N/3),N], [Math.floor(N/5),N], [N-n,N], [n-1,N] ];
+	let evt = randint(1,evts.length-1);
+	let consigne = "Donner la probabilité d'obtenir";
+	let question = "<div class='nombres'>"+evts[evt]+"</div><div class='text-secondary consigne'>sur un dé à "+N+" faces.</div>";
+	let reponse = "<div class='grid nombres reponse'>\\(P="+chainefrac(simpl(probs[evt][0],probs[evt][1]))+"\\)</div>";
+	return ["Probabilités",consigne,question,reponse];
 }
 
 //PYTHON

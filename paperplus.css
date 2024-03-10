@@ -37,12 +37,26 @@ pre {
 	width:5.8cm;
 	height:8.7cm;
 	padding:0.3cm;
+	outline-offset: -7px;
 }
 
 .carte {
 	border-style : dashed;
 	border-width: 2px;
 	border-radius: 8px;
+}
+
+.carte1 {
+	outline: 5px solid #d8ebfd;
+}
+.carte2 {
+	outline: 5px solid #d5dfc8;
+}
+.carte3 {
+	outline: 5px solid #f5f0c6;
+}
+.carte4 {
+	outline: 5px solid #f0cbc9;
 }
 
 .consigne {
@@ -96,7 +110,7 @@ pre {
 		display: block;
 		margin: 0 auto;
     }
-	#options {
+	.noprint {
 		display: none;
 	}
 	#cartes {
@@ -117,4 +131,8 @@ pre {
 		padding-top: 0.6cm;
 		page-break-before: always!important;
 	}
+}
+
+.mathSmall {
+	scale: 0.9;
 }

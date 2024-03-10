@@ -10,10 +10,13 @@
 		<script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js'></script>
 	</head>
 	<body id="home">
-		<div id="options">
+		<div class="noprint">
+			<button class="btn-small" onclick="document.getElementById('options').classList.toggle('hid')">Masquer/afficher le menu</button>
+			<button id="btnImpr" class="btn-small" onclick="imprimer()">Imprimer</button>
+		</div>
+		<div id="options" class="noprint">
 			<div>
 				Nombre de cartes : <span id="compte"></span>
-				<button id="btnImpr" class="btn-small" onclick="imprimer()">Imprimer</button>
 				<button id="btnReponses" class="btn-small btn-warning-outline" onclick="togReponses()">Voir les réponses</button>
 				<button id="btnDup" class="btn-small btn-success-outline" onclick="dupCarte()">Dupliquer la dernière carte</button>
 				<button class="btn-small btn-danger-outline" onclick="supprCarte()">Supprimer</button>
@@ -27,83 +30,93 @@
 			<div id="btnsExo">
 				<div id="btnsExoBases" class="hid">
 					<div>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(arrondis)">Arrondis</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(compNombres)">Comparaisons</button>
+						<button class="btnExo btn-secondary-outline" onclick="creerCarte(arrondis,1)">Arrondis</button>
+						<button class="btnExo btn-secondary-outline" onclick="creerCarte(compNombres,1)">Comparaisons</button>
 					</div>
 					<div>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(tablesmulti)">Tables multi</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(puiss10)">Puissances de 10</button>
+						<button class="btnExo btn-secondary-outline" onclick="creerCarte(tablesmulti,1)">Tables multi</button>
+						<button class="btnExo btn-secondary-outline" onclick="creerCarte(puiss10,1)">Puissances de 10</button>
 					</div>
 					<div>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fracdec)">Fraction vers décimal</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(decfrac)">Décimal vers fraction</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fraccomp)">Comparer des fractions</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fracsimp)">Simplifier</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fraccalc)">Calculs fractions</button>
+						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fracdec,1)">Fraction vers décimal</button>
+						<button class="btnExo btn-secondary-outline" onclick="creerCarte(decfrac,1)">Décimal vers fraction</button>
+						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fraccomp,1)">Comparer des fractions</button>
+						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fracsimp,1)">Simplifier</button>
+						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fraccalc,1)">Calculs fractions</button>
 					</div>
 					<div>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(lectPts)">Coordonnées de points</button>
+						<button class="btnExo btn-secondary-outline" onclick="creerCarte(lectPts,1)">Coordonnées de points</button>
 					</div>
 				</div>
 				<div id="btnsExo2CAP" class="hid">
 					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(unites,1)">Unités simples</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(unites,2)">Surfaces et volumes</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(durees,1)">Durées (facile)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(durees,2)">Durées (moyen)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(durees,3)">Durées (difficile)</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(unites,2,1)">Unités simples</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(unites,2,2)">Surfaces et volumes</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(durees,2,1)">Durées (facile)</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(durees,2,2)">Durées (moyen)</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(durees,2,3)">Durées (difficile)</button>
 					
 					</div>
 					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(tabprop)">Vérifier proportionnalité</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(tabPropCoeff)">Coefficient de proportionnalité</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(quatprop)">Quatrième proportionnelle</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(tabprop,2)">Vérifier proportionnalité</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(tabPropCoeff,2)">Coefficient de proportionnalité</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(quatprop,2)">Quatrième proportionnelle</button>
 						<!--<button class="btnExo" onclick="creerCarte(echelles)">Échelles</button>-->
 					</div>
 					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(calcPourcent)">Calculer 10%, 20%...</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(tauxPourcent)">Taux de variation</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(calcPourcent,2)">Calculer 10%, 20%...</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(tauxPourcent,2)">Taux de variation</button>
 					</div>
 					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(equa1d,1)">Équation \(ax=d\)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(equa1d,2)">Équation \(ax+b=d\)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(equa1d,3)">Équation \(ax+b=cx+d\)</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(equa1d,2,1)">Équation \(ax=d\)</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(equa1d,2,2)">Équation \(ax+b=d\)</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(equa1d,2,3)">Équation \(ax+b=cx+d\)</button>
 					</div>
 					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(pythagore,1)">Relation de Pythagore (1)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(pythagore,2)">Relation de Pythagore (2)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(pythagore,3)">Calcul avec Pythagore</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(pythagore,2,1)">Relation de Pythagore (1)</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(pythagore,2,2)">Relation de Pythagore (2)</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(pythagore,2,3)">Calcul avec Pythagore</button>
 					</div>
 					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(coeffDir)">Calcul de pente</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(coeffDir,2)">Calcul de pente</button>
 					</div>
 					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(lectCarre)">Lecture graphique \(x^2\)</button>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(calcImageAffine,2)">Image par fn affine</button>
+					</div>
+					<div>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(proba1De,2)">Probas 1 dé</button>
+					</div>
+					<div>
+						<button class="btnExo btn-success-outline" onclick="creerCarte(lectCarre,2)">Lecture graphique \(x^2\)</button>
 					</div>
 				</div>
 				<div id="btnsExo1e" class="hid">
 					<div>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(scienti)">Écriture scientifique</button>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(scientideci)">Lire l'écriture scientifique</button>
+						<button class="btnExo btn-warning-outline" onclick="creerCarte(scienti,3)">Écriture scientifique</button>
+						<button class="btnExo btn-warning-outline" onclick="creerCarte(scientideci,3)">Lire l'écriture scientifique</button>
 					</div>
 					<div>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(verifSuiteA)">Vérif. suite arithm.</button>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(calcTermeSuiteA)">Calc. terme suite arithm.</button>
+						<button class="btnExo btn-warning-outline" onclick="creerCarte(verifSuiteA,3)">Vérif. suite arithm.</button>
+						<button class="btnExo btn-warning-outline" onclick="creerCarte(calcTermeSuiteA,3)">Calc. terme suite arithm.</button>
 					</div>
 					<div>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(lectVec)">Coordonnées de vecteurs</button>
+						<button class="btnExo btn-warning-outline" onclick="creerCarte(lectVec,3)">Coordonnées de vecteurs</button>
 					</div>
 					<div>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(equa2d,1)">Équation 2nd degré</button>
+						<button class="btnExo btn-warning-outline" onclick="creerCarte(equa2dVerif,3)">Vérif. racine 2nd degré</button>
+						<button class="btnExo btn-warning-outline" onclick="creerCarte(equa2d,3)">Racines 2nd degré</button>
+					</div>
+					<div>
+						<button class="btnExo btn-warning-outline" onclick="creerCarte(calcImage2Deg,3)">Image par fn 2nd degré</button>
 					</div>
 				</div>
 				<div id="btnsExoTle" class="hid">
 					<div>
-						<button class="btnExo btn-danger-outline" onclick="creerCarte(verifSuiteG)">Vérif. suite géo.</button>
-						<button class="btnExo btn-danger-outline" onclick="creerCarte(calcTermeSuiteG)">Calc. terme suite géo.</button>
+						<button class="btnExo btn-danger-outline" onclick="creerCarte(verifSuiteG,4)">Vérif. suite géo.</button>
+						<button class="btnExo btn-danger-outline" onclick="creerCarte(calcTermeSuiteG,4)">Calc. terme suite géo.</button>
 					</div>
 					<div>
-						<button class="btnExo btn-danger-outline" onclick="creerCarte(calcLog)">Calcul log.</button>
+						<button class="btnExo btn-danger-outline" onclick="creerCarte(calcLog,4)">Calcul log.</button>
 					</div>
 				</div>
 				<div id="btnsExoBeta" class="hid">
