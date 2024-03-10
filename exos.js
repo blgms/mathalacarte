@@ -77,7 +77,7 @@ function scienti() {
 	}
 	question += "</div>";
 	reponse += "</div>";
-	return ["Écrit. scientifique",consigne,question,reponse];
+	return ["Écriture scientifique",consigne,question,reponse];
 }
 
 //PASSER EN ECRITURE DECIMALE
@@ -106,7 +106,7 @@ function scientideci() {
 		reponse += "<div>\\("+pointVirg(numch.toString())+"\\)</div>";
 	}
 	question += "</div>";
-	return ["Écrit. scientifique",consigne,question,reponse];
+	return ["Écriture scientifique",consigne,question,reponse];
 }
 
 //CALCUL MENTAL
@@ -531,7 +531,7 @@ function equa2dVerif() {
 	let consigne = "<div>Vérifier si "+x+" est une racine du polynôme suivant :</div>";
 	let question = "<div class='nombres'>\\("+na+"x^2"+nb+"x"+nc+"\\)</div>";	
 	let reponse = "<div class='nombres reponse grid'>"+x+repstr+" une racine du polynôme.</div>";
-	return ["Équations 2nd deg.",consigne,question,reponse];
+	return ["Équations 2nd degré",consigne,question,reponse];
 }
 
 //trouver les racines
@@ -558,7 +558,7 @@ function equa2d() {
 	let consigne = "<div>Indiquer les solutions de l'équation.</div>";
 	let question = "<div class='nombres'>\\("+na+"x^2"+nb+"x"+nc+"=0\\)</div>";	
 	let reponse = "<div class='nombres reponse grid'>"+sol+"</div>";
-	return ["Équations 2nd deg.",consigne,question,reponse];
+	return ["Équations 2nd degré",consigne,question,reponse];
 }
 
 //FONCTIONS
@@ -774,7 +774,7 @@ function verifSuiteA() {
 	let a = randint(0,1);
 	let question = "<div class='grid nombres'>\\(u_"+n+"="+u1+"\\)<br>\\(u_"+(n+1)+"="+(u1+r+a*randint(-5,5))+"\\)<br>\\(u_"+(n+2)+"="+(u1+2*r+a*randint(-5,5))+"\\)</div>";
 	let reponse = (a === 1) ? "<div class='reponse'>La suite n'est pas arithmétique.</div>":"<div class='reponse'>La suite est arithmétique de raison \\(r="+r+"\\).</div>";
-	return ["Suites arithm.",consigne,question,reponse];
+	return ["Suites arithmétiques",consigne,question,reponse];
 }
 
 function calcTermeSuiteA() {
@@ -784,7 +784,7 @@ function calcTermeSuiteA() {
 	let consigne = "Calculer le terme de rang \\(n="+n+"\\) de la suite arithmétique définie par :";
 	let question = "<div class='grid nombres'>\\(u_1="+u1+"\\)<br>\\(r="+r+"\\)</div>";
 	let reponse = "<div class='grid nombres reponse'>\\(u_{"+n+"}="+(u1+(n-1)*r)+"\\)</div>";
-	return ["Suites arithm.",consigne,question,reponse];
+	return ["Suites arithmétiques",consigne,question,reponse];
 }
 
 function verifSuiteG() {
@@ -796,7 +796,7 @@ function verifSuiteG() {
 	let a = randint(0,1);
 	let question = "<div class='grid nombres'>\\(u_"+n+"="+u1+"\\)<br>\\(u_"+(n+1)+"="+(u1*(q+a))+"\\)<br>\\(u_"+(n+2)+"="+(u1*(q+a)**2)+"\\)</div>";
 	let reponse = (a === 1) ? "<div class='reponse'>La suite n'est pas géométrique.</div>":"<div class='reponse'>La suite est géométrique de raison \\(q="+pointVirg(q.toString())+"\\).</div>";
-	return ["Suites géom.",consigne,question,reponse];
+	return ["Suites géométriques",consigne,question,reponse];
 }
 
 function calcTermeSuiteG() {
@@ -809,7 +809,7 @@ function calcTermeSuiteG() {
 	let consigne = "Calculer le terme de rang \\(n="+n+"\\) de la suite géométrique définie par :";
 	let question = "<div class='grid nombres'>\\(u_1="+u1+"\\)<br>\\(q="+pointVirg(qaff.toString())+"\\)</div>";
 	let reponse = "<div class='grid nombres reponse'>\\(u_{"+n+"}="+pointVirg(un.toString())+"\\)</div>";
-	return ["Suites géom.",consigne,question,reponse];
+	return ["Suites géométriques",consigne,question,reponse];
 }
 
 
