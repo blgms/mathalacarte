@@ -77,6 +77,25 @@ function tripletsD(inf,sup) {
 	return liste;
 }
 
+//RECHERCHE DES TRIPLETS a, b, c NON NULS TELS QUE les racines du polynôme ax2+bx+c soient entières + renvoi racines
+function tripletsDxEnt(inf,sup) {
+	let liste=[];
+	for (let a=inf;a<=sup;a++) {
+		for (let b=inf;b<=sup;b++) {
+			for (let c=inf;c<=sup;c++) {
+				let rd = Math.sqrt(b*b-4*a*c);
+				if (Number.isInteger(Math.sqrt(b*b-4*a*c)) && a!=0 && b!=0 && c!=0) {
+					let x1 = (-b-rd)/(2*a), x2 = (-b+rd)/(2*a);
+					if (Number.isInteger(x1) && Number.isInteger(x2)) {
+						liste.push([a,b,c,x1,x2]);
+					}
+				}
+			}
+		}
+	}
+	return liste;
+}
+
 //RECHERCHE DES TRIPLETS PYTHAGORICIENS tels que k² = i² + j²
 function tripletsPyth(a,b) {
 	let triplets = [];
