@@ -428,7 +428,7 @@ function decfrac() {
 
 //COMPARAISON DE FRACTIONS
 function fraccomp() {
-	let consigne = "Compléter avec les symboles \\(<\\) ou \\(>\\) :";
+	let consigne = "Compléter avec les symboles \\(=\\), \\(<\\) ou \\(>\\) :";
 	let question = "<div class='grid nombres'>";
 	let reponse = "<div class='grid nombres reponse'>";
 	let La = [1, 2, 3, 4, 5, 10, 20, 25];
@@ -698,15 +698,15 @@ function pythagore(exo) {
 	cotes[2].push(Math.round(10*Math.sqrt(cotes[0][2]**2+cotes[1][2]**2))/10);
 	let consigne,reponse;
 	if (exo == 1) {
-		consigne = "Écrire la relation permettant de calculer la longueur \\("+cotes[2][0]+"\\) dans ce triangle rectangle.";
+		consigne = "Écrire la relation permettant de calculer la longueur \\("+cotes[2][0]+"\\).";
 		reponse = "<div class='nombres reponse'>\\("+cotes[2][0]+"²&nbsp;=&nbsp;"+cotes[2][1]+"\\)</div>";
 	} else if (exo == 2) {
 		let n = randint(0,1);
-		consigne = "Écrire la relation permettant de calculer la longueur \\("+cotes[n][0]+"\\) dans ce triangle rectangle.";
+		consigne = "Écrire la relation permettant de calculer la longueur \\("+cotes[n][0]+"\\).";
 		reponse = "<div class='nombres reponse'>\\("+cotes[n][0]+"²&nbsp;=&nbsp;"+cotes[n][1]+"\\)</div>";
 	} else if (exo == 3) {
 		cotes.sort(() => Math.random() - 0.5);
-		consigne = "\\("+cotes[1][0]+"="+pointVirg(cotes[1][3].toString())+"\\) et \\("+cotes[2][0]+"="+pointVirg(cotes[2][3].toString())+"\\). Calculer la longueur \\("+cotes[0][0]+"\\) arrondie au dixième.";
+		consigne = "\\("+cotes[1][0]+"="+pointVirg(cotes[1][3].toString())+"\\) et \\("+cotes[2][0]+"="+pointVirg(cotes[2][3].toString())+"\\). <br>Calculer \\("+cotes[0][0]+"\\).";
 		reponse = "<div class='nombres reponse'>\\("+cotes[0][0]+"&nbsp;=&nbsp;"+pointVirg(cotes[0][3].toString())+"\\)</div>";
 	}
 	return ["Pythagore",consigne,"",reponse];
@@ -786,7 +786,7 @@ function lectCarre() {
 	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
 	let board = graphique([-4, 7, 4, -1]);
 	let graph = board.create('functiongraph',[function(x){ return x*x; },-5,5]);
-	let consigne = "Donner l'image par la fonction \\(f\\) représentée ci-dessous des nombres \\("+pointVirg(ptsx[0].toString())+"\\), \\("+pointVirg(ptsx[1].toString())+"\\) et \\("+pointVirg(ptsx[2].toString())+"\\).";
+	let consigne = "Donner l'image par la fonction \\(f\\) des nombres \\("+pointVirg(ptsx[0].toString())+"\\), \\("+pointVirg(ptsx[1].toString())+"\\) et \\("+pointVirg(ptsx[2].toString())+"\\).";
 	let reponse = "<div class='grid nombres reponse'>\\(f("+pointVirg(ptsx[0].toString())+")="+pointVirg(ptsy[0].toString())+"\\)<br>\\(f("+pointVirg(ptsx[1].toString())+")="+pointVirg(ptsy[1].toString())+"\\)<br>\\(f("+pointVirg(ptsx[2].toString())+")="+pointVirg(ptsy[2].toString())+"\\)</div>"
 	return ["Fonctions",consigne,"",reponse];
 }
@@ -808,7 +808,7 @@ function calcLog() {
 
 //SUITES
 function verifSuiteA() {
-	let consigne = "Indiquer si ces termes font partie d'une suite arithmétique, et si oui, indiquer sa raison \\(r\\).";
+	let consigne = "Vérifier si ces termes forment une suite arithmétique.";
 	let n = randint(1,5);
 	let u1 = randint(-20,20);
 	let r = randint(2,20)*randoppose();
@@ -829,7 +829,7 @@ function calcTermeSuiteA() {
 }
 
 function verifSuiteG() {
-	let consigne = "Indiquer si ces termes font partie d'une suite géométrique, et si oui, indiquer sa raison \\(q\\).";
+	let consigne = "Indiquer si ces termes forment une suite géométrique.";
 	let n = randint(1,5);
 	let u1 = randint(-20,20);
 	let L = [0.1, 0.25, 0.5, 1.5, 2, 2.5, 5, 10];

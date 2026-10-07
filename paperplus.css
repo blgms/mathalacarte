@@ -8,9 +8,10 @@
 	.dos {
 		float: left;
 		border-style : dashed;
-		border-width: 2px;
+		border-width: 1px;
 		border-radius: 8px;
 		margin: 0 10px 10px 0;
+		border-color: white;
 	}
 	.carte {
 		margin: 0 10px 10px 0;
@@ -42,7 +43,8 @@ pre {
 
 .carte {
 	border-style : dashed;
-	border-width: 2px;
+	border-width: 1px;
+	border-color: grey;
 	border-radius: 8px;
 }
 
@@ -63,11 +65,11 @@ pre {
 	margin: 0.1cm;
 	padding: auto;
 	font-size: 0.9em;
-	height: 2cm;
+	height: 1.6cm;
 }
 .titre {
-	font-size: 1.2em;
-	margin: 0.1cm 0.1cm 0.2cm 0.1cm;
+	font-size: 1.1em;
+	margin: -0.1cm 0.1cm 0.2cm 0.1cm;
 	border-bottom: 2px solid;
 }
 
@@ -85,7 +87,7 @@ pre {
 
 .nombres {
 	text-align: center;
-	line-height: 3em;
+	line-height: 2.5em;
 }
 
 .proportion tr:first-child td {

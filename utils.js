@@ -32,7 +32,7 @@ function chainefrac(array) {
 	if (array[0]*array[1]<0) {
 		fraction += "-";
 	}
-	fraction += "\\dfrac{"+Math.abs(array[0])+"}{"+Math.abs(array[1])+"}";
+	fraction += "\\frac{"+Math.abs(array[0])+"}{"+Math.abs(array[1])+"}";
 	return fraction;
 }
 
