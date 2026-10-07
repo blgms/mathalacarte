@@ -195,3 +195,46 @@ function graphique(lim) {
 		}
 		});
 }
+
+
+//Arrondi d'un nombre à n décimales
+function arrondi(x,n) {
+	let i = x.toString().indexOf('.');
+	let y = Number(x.toString().substring(0,i+n+2));
+	return Math.round(y*(10**n))/(10**n);
+}
+
+//Arrondi à la première décimale significative
+function arrondiDec1(x) {
+	let xStr = x.toString();
+	let y = xStr.split(".");
+	let regex = /[1-9]/g;
+	let j = y[1].toString().search(regex);
+	return x.toFixed(j+1);	
+}
+//Arrondi à la dernière décimale significative CASSE
+function arrondiDec(x) {
+	let xStr = x.toString();
+	let y = xStr.split(".");
+	let regex = /[1-9]/g;
+	let j = y[1].search(regex);
+	console.log(j);
+	let yStr = y[1].substring(j,y[1].length);
+	console.log(yStr);
+	let k = yStr.indexOf("0");
+	console.log(k);
+	return x.toFixed(j+k);	
+}
+
+//Arranger liste aléatoirement
+function randomize(x) {
+	console.log(x);
+	let y = [], n = x.length;
+	for (let i=0 ; i<n ; i++) {
+		let j = randint(0,x.length-1);
+		y[i] = x[j];
+		x.splice(j,1);
+	}
+	console.log(y);
+	return y;
+}

@@ -334,6 +334,32 @@ function tauxPourcent() {
 	return ["Pourcentages",consigne,question,reponse];
 }
 
+//Quel pourcentage ?
+function quelPourcent(ex) {
+	let n = randint(1,100)*10;
+	let p = [ [100, n] ];
+	let L = [10, 20, 25, 40, 50, 60, 75, 80, 90];
+	let pStr = "", NStr = "";
+	for (let i = 1 ; i<4 ; i++) {
+		let j = randint(0,L.length-1);
+		p[i] = [ L[j], arrondi(L[j]*n/100,2) ];
+		L.splice(j,1);
+	}
+	console.log(p);
+	if (ex == 2) { 
+		p = randomize(p);
+	}
+	for (let i = 1 ; i < 4 ; i++) {
+		pStr += "\\("+p[i][1]+" = "+p[i][0]+" \\%\\) de \\("+n+"\\)<br>";
+		NStr += "\\("+p[i][1]+"\\)<br>";
+	}
+	let consigne = "Si "+p[0][1]+" correspond à "+p[0][0]+"%, à quels pourcentages correspondent les valeurs suivantes ?";
+	let question = "<div class='nombres'>"+pointVirg(NStr)+"</div>"
+	let reponse = "<div class='reponse nombres'>"+pointVirg(pStr)+"</div>";
+	return ["Pourcentages",consigne,question,reponse]
+}
+
+
 /*
  * //ECHELLES
 function echelles() {
@@ -469,6 +495,21 @@ function fraccalc() {
 
 
 //STATISTIQUES
+//Calcul d'une moyenne
+function statsMoy() {
+	let N = randint(3,7);
+	let x = [], xStr = "", s = 0;
+	for (let i=0 ; i<N ; i++) {
+		x[i] = randint(1,50);
+		xStr += (i===N-1)? x[i] : x[i]+"<br>";
+		s += x[i];
+	}
+	let consigne = "Calculer la moyenne des valeurs suivantes :";
+	let moy = s/N ;
+	let reponse = (moy.toString().length>5)? "\\(\\bar{x} \\simeq"+pointVirg((Math.round(s*100/N)/100).toString())+"\\)" : "\\(\\bar{x}="+pointVirg((moy).toString())+"\\)";
+	return ["Statistiques",consigne,xStr,reponse];
+}
+
 //Diagramme circulaire
 function statsCirc() {
 	document.getElementById("question"+idCarte).innerHTML = "<div id='box"+idCarte+"' class='jxgbox'></div>";
@@ -758,7 +799,7 @@ function calcLog() {
 	let n2 = n*10**k;
 	let logn = Math.round(Math.log10(n)*10)/10;
 	let logn2 = Math.round(Math.log10(n2)*10)/10;
-	let consigne = "Sachant que \\(log({"+n+"}) \\simeq"+pointVirg(logn.toString())+"\\) donner sans calculatrice la valeur de";
+	let consigne = "Sachant que \\(log({"+n+"}) \\simeq"+pointVirg(logn.toString())+"\\) donner sans calculatrice la valeur approximative de";
 	let question = "<div class='grid nombres'>\\(log("+pointVirg(n2.toString())+")\\)</div>";
 	let reponse = "<div class='grid nombres reponse'>\\(log("+pointVirg(n2.toString())+") \\simeq"+pointVirg(logn2.toString())+"\\)</div>";
 	return ["Logarithme",consigne,question,reponse];
@@ -794,7 +835,7 @@ function verifSuiteG() {
 	let L = [0.1, 0.25, 0.5, 1.5, 2, 2.5, 5, 10];
 	let q = L[randint(0,L.length-1)];
 	let a = randint(0,1);
-	let question = "<div class='grid nombres'>\\(u_"+n+"="+u1+"\\)<br>\\(u_"+(n+1)+"="+(u1*(q+a))+"\\)<br>\\(u_"+(n+2)+"="+(u1*(q+a)**2)+"\\)</div>";
+	let question = "<div class='grid nombres'>\\(u_"+n+"="+u1+"\\)<br>\\(u_"+(n+1)+"="+pointVirg((u1*(q+a*randint(1,10))).toString())+"\\)<br>\\(u_"+(n+2)+"="+pointVirg((u1*(q+a*randint(1,10))**2).toString())+"\\)</div>";
 	let reponse = (a === 1) ? "<div class='reponse'>La suite n'est pas géométrique.</div>":"<div class='reponse'>La suite est géométrique de raison \\(q="+pointVirg(q.toString())+"\\).</div>";
 	return ["Suites géométriques",consigne,question,reponse];
 }
@@ -835,4 +876,30 @@ function pythCalc() {
 	let consigne = "Voici une fonction Python. <pre><code>def calcul(x,y): <br>&emsp;&emsp;return x"+calcs[calc]+"y	</code></pre> Quel sera le retour de la commande <code>calcul("+a+","+b+")</code> ?";
 	let reponse = eval(a+calcs[calc]+b);
 	return ["Python",consigne,"",reponse];
+}
+
+//FORMULES
+function formules() {
+	let Unites = [ 	["d", "v", "t"],
+					["U", "R", "I"],
+					["P", "U", "I"],
+					["E", "P", "t"],
+					["V", "Q", "t"],
+					["Q", "v", "S"],
+					["A", "L", "l"],
+	];
+	let u = Unites[randint(0,Unites.length-1)];
+	let Formules = [[ u[0], "\\("+u[0]+"="+u[1]+" \\times "+u[2]+"\\)" ],
+					[ u[1], "\\("+u[1]+"=\\dfrac{"+u[0]+"}{"+u[2]+"}\\)" ],
+					[ u[2], "\\("+u[2]+"=\\dfrac{"+u[0]+"}{"+u[1]+"}\\)" ]
+	];
+	let nq = randint(0,2);
+	let q = Formules[nq];
+	Formules.splice(nq,1);
+	let nr = randint(0,1);
+	let r = Formules[nr];
+	let consigne = "On donne la formule suivante : ";
+	let question = "<div class='nombres'>"+q[1]+"</div><div>Transformer cette formule afin de calculer \\("+r[0]+"\\).</div>";
+	let reponse = "<div classe='reponse'>"+r[1]+"</div>";
+	return ["Formules",consigne,question,reponse];
 }
