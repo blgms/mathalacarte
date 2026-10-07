@@ -44,10 +44,10 @@ function compteur(n) {
 function creerCarte(exercice,diff,id) {
 	document.getElementById("divPage"+idPage).innerHTML += "<div id='carte"+idCarte+"' class='sm-2 carte carte"+diff+"'><div id='titre"+idCarte+"' class='titre'></div><div id='consigne"+idCarte+"' class='text-secondary consigne'></div><div id='question"+idCarte+"' class='centre question'></div></div>";
 	let infos = exercice(id) ;
-	document.getElementById("titre"+idCarte).innerHTML += infos[0];
+	document.getElementById("titre"+idCarte).innerHTML += "<small>☆</small>".repeat(diff) + "<br>" + infos[0];
 	document.getElementById("consigne"+idCarte).innerHTML += infos[1];
 	document.getElementById("question"+idCarte).innerHTML += infos[2];
-	document.getElementById("divPageDos"+idPage).innerHTML += "<div id='dos"+idCarte+"' class='sm-2 dos carte"+diff+"'><div class='titre'>"+infos[0]+"</div><div class='consigne'>Réponse :</div><div id='reponse"+idCarte+"' class='text-success centre reponse'>"+infos[3]+"</div></div>";
+	document.getElementById("divPageDos"+idPage).innerHTML += "<div id='dos"+idCarte+"' class='sm-2 dos carte"+diff+"'><div class='consigne'>Réponse :</div><div id='reponse"+idCarte+"' class='text-success centre reponse'>"+infos[3]+"</div></div>";
 	compteur(1);
 }
 
