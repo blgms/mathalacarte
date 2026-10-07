@@ -2,146 +2,143 @@
 <html lang="fr">
 	<head>
 		<meta charset="utf-8" />
-		<title>Testonnage</title>
-		<link rel="stylesheet" type="text/css" href="paper.css" />
-		<link rel="stylesheet" type="text/css" href="paperplus.css" />
-		<link rel="stylesheet" type="text/css" href="https://jsxgraph.org/distrib/jsxgraph.css" />
-		<script type="text/javascript" src="https://jsxgraph.org/distrib/jsxgraphcore.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Mathalacarte</title>
+		<link rel="stylesheet" href="paper.css" />
+		<link rel="stylesheet" href="paperplus.css" />
+		<link rel="stylesheet" href="https://jsxgraph.org/distrib/jsxgraph.css" />
+		<script src="https://jsxgraph.org/distrib/jsxgraphcore.js"></script>
 		<script id='MathJax-script' async src='https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js'></script>
 	</head>
-	<body id="home">
-		<div class="noprint">
-			<button class="btn-small" onclick="document.getElementById('options').classList.toggle('hid')">Masquer/afficher le menu</button>
-			<button id="btnImpr" class="btn-small" onclick="imprimer()">Imprimer</button>
-		</div>
-		<div id="options" class="noprint">
-			<div>
-				Nombre de cartes : <span id="compte"></span>
+	<body>
+		<aside id="menu" class="noprint">
+			<div id="actions">
+				<button class="btn-small" onclick="document.getElementById('menu').classList.add('hid')">Masquer le menu</button>
+				<button class="btn-small" onclick="imprimer()">Imprimer</button>
 				<button id="btnReponses" class="btn-small btn-warning-outline" onclick="togReponses()">Voir les réponses</button>
-				<button id="btnDup" class="btn-small btn-success-outline" onclick="dupCarte()">Dupliquer la dernière carte</button>
+				<button class="btn-small btn-success-outline" onclick="dupCarte()">Dupliquer la dernière carte</button>
 				<button class="btn-small btn-danger-outline" onclick="supprCarte()">Supprimer</button>
 				<button class="btn-small btn-danger-outline" onclick="location.reload()">Tout supprimer</button>
 			</div>
-			<button class="btn-secondary-outline" onclick="document.getElementById('btnsExoBases').classList.toggle('hid')">Bases</button>
-			<button class="btn-success-outline" onclick="document.getElementById('btnsExo2CAP').classList.toggle('hid')">2nde/CAP</button>
-			<button class="btn-warning-outline" onclick="document.getElementById('btnsExo1e').classList.toggle('hid')">Première</button>
-			<button class="btn-danger-outline" onclick="document.getElementById('btnsExoTle').classList.toggle('hid')">Terminale</button>
-			<button onclick="document.getElementById('btnsExoBeta').classList.toggle('hid')">Bêta</button>
-			<div id="btnsExo">
-				<div id="btnsExoBases" class="hid">
-					<div>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(arrondis,1)">Arrondis</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(compNombres,1)">Comparaisons</button>
-					</div>
-					<div>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(tablesmulti,1)">Tables multi</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(puiss10,1)">Puissances de 10</button>
-					</div>
-					<div>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fracdec,1)">Fraction vers décimal</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(decfrac,1)">Décimal vers fraction</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fraccomp,1)">Comparer des fractions</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fracsimp,1)">Simplifier</button>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(fraccalc,1)">Calculs fractions</button>
-					</div>
-					<div>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(lectPts,1)">Coordonnées de points</button>
-					</div>
-					<div>
-						<button class="btnExo btn-secondary-outline" onclick="creerCarte(statsMoy,1)">Calcul de moyenne</button>
-					</div>
-				</div>
-				<div id="btnsExo2CAP" class="hid">
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(unites,2,1)">Unités simples</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(unites,2,2)">Surfaces et volumes</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(durees,2,1)">Durées (facile)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(durees,2,2)">Durées (moyen)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(durees,2,3)">Durées (difficile)</button>
-					
-					</div>
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(tabprop,2)">Vérifier proportionnalité</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(tabPropCoeff,2)">Coefficient de proportionnalité</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(quatprop,2)">Quatrième proportionnelle</button>
-						<!--<button class="btnExo" onclick="creerCarte(echelles)">Échelles</button>-->
-					</div>
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(calcPourcent,2)">Calculer 10%, 20%...</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(tauxPourcent,2)">Taux de variation</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(quelPourcent,2,1)">Quel pourcentage ?</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(quelPourcent,2,2)">Quel pourcentage (2) ?</button>
-					</div>
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(equa1d,2,1)">Équation \(ax=d\)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(equa1d,2,2)">Équation \(ax+b=d\)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(equa1d,2,3)">Équation \(ax+b=cx+d\)</button>
-					</div>
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(pythagore,2,1)">Relation de Pythagore (1)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(pythagore,2,2)">Relation de Pythagore (2)</button>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(pythagore,2,3)">Calcul avec Pythagore</button>
-					</div>
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(coeffDir,2)">Calcul de pente</button>
-					</div>
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(calcImageAffine,2)">Image par fn affine</button>
-					</div>
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(proba1De,2)">Probas 1 dé</button>
-					</div>
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(lectCarre,2)">Lecture graphique \(x^2\)</button>
-					</div>
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(formules,2)">Transformer des formules</button>
-					</div>
-				</div>
-				<div id="btnsExo1e" class="hid">
-					<div>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(scienti,3)">Écriture scientifique</button>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(scientideci,3)">Lire l'écriture scientifique</button>
-					</div>
-					<div>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(verifSuiteA,3)">Vérif. suite arithm.</button>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(calcTermeSuiteA,3)">Calc. terme suite arithm.</button>
-					</div>
-					<div>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(lectVec,3)">Coordonnées de vecteurs</button>
-					</div>
-					<div>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(equa2dVerif,3)">Vérif. racine 2nd degré</button>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(equa2d,3)">Racines 2nd degré</button>
-					</div>
-					<div>
-						<button class="btnExo btn-warning-outline" onclick="creerCarte(calcImage2Deg,3)">Image par fn 2nd degré</button>
-					</div>
-				</div>
-				<div id="btnsExoTle" class="hid">
-					<div>
-						<button class="btnExo btn-danger-outline" onclick="creerCarte(verifSuiteG,4)">Vérif. suite géo.</button>
-						<button class="btnExo btn-danger-outline" onclick="creerCarte(calcTermeSuiteG,4)">Calc. terme suite géo.</button>
-					</div>
-					<div>
-						<button class="btnExo btn-danger-outline" onclick="creerCarte(calcLog,4)">Calcul log.</button>
-					</div>
-				</div>
-				<div id="btnsExoBeta" class="hid">
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(statsCirc)">Diagramme circulaire</button>
-					</div>
-					<div>
-						<button class="btnExo btn-success-outline" onclick="creerCarte(pythCalc)">Fonction Python</button>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
+			<p>Nombre de cartes : <span id="compte"></span></p>
+			<details>
+				<summary>Nombres</summary>
+				<span class="badge secondary" onclick="creerCarte(arrondis,1)">Arrondis</span>
+				<span class="badge secondary" onclick="creerCarte(compNombres,1)">Comparaisons</span>
+			</details>
+			<details>
+				<summary>Calcul</summary>
+				<span class="badge secondary" onclick="creerCarte(tablesmulti,1)">Tables multi</span>
+				<span class="badge secondary" onclick="creerCarte(puiss10,1)">Puissances de 10</span>
+			</details>
+			<details>
+				<summary>Fractions</summary>
+				<span class="badge secondary" onclick="creerCarte(fracdec,1)">Fraction vers décimal</span>
+				<span class="badge secondary" onclick="creerCarte(decfrac,1)">Décimal vers fraction</span>
+				<span class="badge secondary" onclick="creerCarte(fraccomp,1)">Comparer des fractions</span>
+				<span class="badge secondary" onclick="creerCarte(fracsimp,1)">Simplifier</span>
+				<span class="badge secondary" onclick="creerCarte(fraccalc,1)">Calculs fractions</span>
+			</details>
+			<details>
+				<summary>Statistiques</summary>
+				<span class="badge secondary" onclick="creerCarte(statsMoy,1)">Calcul de moyenne</span>
+			</details>
+			<details>
+				<summary>Unités</summary>
+				<span class="badge success" onclick="creerCarte(unites,2,1)">Unités simples</span>
+				<span class="badge success" onclick="creerCarte(unites,2,2)">Surfaces et volumes</span>
+				<span class="badge success" onclick="creerCarte(durees,2,1)">Durées (facile)</span>
+				<span class="badge success" onclick="creerCarte(durees,2,2)">Durées (moyen)</span>
+				<span class="badge success" onclick="creerCarte(durees,2,3)">Durées (difficile)</span>
+			</details>
+			<details>
+				<summary>Proportionnalité</summary>
+				<span class="badge success" onclick="creerCarte(tabprop,2)">Vérifier proportionnalité</span>
+				<span class="badge success" onclick="creerCarte(tabPropCoeff,2)">Coefficient de proportionnalité</span>
+				<span class="badge success" onclick="creerCarte(quatprop,2)">Quatrième proportionnelle</span>
+			</details>
+			<details>
+				<summary>Pourcentages</summary>
+				<span class="badge success" onclick="creerCarte(calcPourcent,2)">Calculer 10%, 20%...</span>
+				<span class="badge success" onclick="creerCarte(tauxPourcent,2)">Taux de variation</span>
+				<span class="badge success" onclick="creerCarte(quelPourcent,2,1)">Quel pourcentage ?</span>
+				<span class="badge success" onclick="creerCarte(quelPourcent,2,2)">Quel pourcentage (2) ?</span>
+			</details>
+			<details>
+				<summary>Équations</summary>
+				<span class="badge success" onclick="creerCarte(equa1d,2,1)">Équation \(ax=d\)</span>
+				<span class="badge success" onclick="creerCarte(equa1d,2,2)">Équation \(ax+b=d\)</span>
+				<span class="badge success" onclick="creerCarte(equa1d,2,3)">Équation \(ax+b=cx+d\)</span>
+			</details>
+			<details>
+				<summary>Pythagore</summary>
+				<span class="badge success" onclick="creerCarte(pythagore,2,1)">Relation de Pythagore (1)</span>
+				<span class="badge success" onclick="creerCarte(pythagore,2,2)">Relation de Pythagore (2)</span>
+				<span class="badge success" onclick="creerCarte(pythagore,2,3)">Calcul avec Pythagore</span>
+			</details>
+			<details>
+				<summary>Repérage</summary>
+				<span class="badge secondary" onclick="creerCarte(lectPts,1)">Coordonnées de points</span>
+				<span class="badge success" onclick="creerCarte(coeffDir,2)">Calcul de pente</span>
+			</details>
+			<details>
+				<summary>Fonctions</summary>
+				<span class="badge success" onclick="creerCarte(calcImageAffine,2)">Image par fn affine</span>
+				<span class="badge success" onclick="creerCarte(lectCarre,2)">Lecture graphique \(x^2\)</span>
+				<span class="badge warning" onclick="creerCarte(calcImage2Deg,3)">Image par fn 2nd degré</span>
+			</details>
+			<details>
+				<summary>Probabilités</summary>
+				<span class="badge success" onclick="creerCarte(proba1De,2)">Probas 1 dé</span>
+			</details>
+			<details>
+				<summary>Formules</summary>
+				<span class="badge success" onclick="creerCarte(formules,2)">Transformer des formules</span>
+			</details>
+			<details>
+				<summary>Écriture scientifique</summary>
+				<span class="badge warning" onclick="creerCarte(scienti,3)">Écriture scientifique</span>
+				<span class="badge warning" onclick="creerCarte(scientideci,3)">Lire l'écriture scientifique</span>
+			</details>
+			<details>
+				<summary>Suites arithmétiques</summary>
+				<span class="badge warning" onclick="creerCarte(verifSuiteA,3)">Vérif. suite arithm.</span>
+				<span class="badge warning" onclick="creerCarte(calcTermeSuiteA,3)">Calc. terme suite arithm.</span>
+			</details>
+			<details>
+				<summary>Vecteurs</summary>
+				<span class="badge warning" onclick="creerCarte(lectVec,3)">Coordonnées de vecteurs</span>
+			</details>
+			<details>
+				<summary>Équations 2nd degré</summary>
+				<span class="badge warning" onclick="creerCarte(equa2dVerif,3)">Vérif. racine 2nd degré</span>
+				<span class="badge warning" onclick="creerCarte(equa2d,3)">Racines 2nd degré</span>
+			</details>
+			<details>
+				<summary>Suites géométriques</summary>
+				<span class="badge danger" onclick="creerCarte(verifSuiteG,4)">Vérif. suite géo.</span>
+				<span class="badge danger" onclick="creerCarte(calcTermeSuiteG,4)">Calc. terme suite géo.</span>
+			</details>
+			<details>
+				<summary>Logarithme</summary>
+				<span class="badge danger" onclick="creerCarte(calcLog,4)">Calcul log.</span>
+			</details>
+			<details>
+				<summary>Stats (bêta)</summary>
+				<span class="badge success" onclick="creerCarte(statsCirc)">Diagramme circulaire</span>
+			</details>
+			<details>
+				<summary>Python (bêta)</summary>
+				<span class="badge success" onclick="creerCarte(pythCalc)">Fonction Python</span>
+			</details>
+		</aside>
+		<button id="btnMenu" class="noprint" onclick="document.getElementById('menu').classList.remove('hid')">☰ Menu</button>
+		<main class="row">
 			<div id="cartes" class="col"><div id="divPage0"></div><div id="divPageDos0" class="page collapse"></div></div>
-		</div>
-	</body>
-	<script type="text/javascript" src="script.js"></script>
-	<script type="text/javascript" src="exos.js"></script>
-	<script type="text/javascript" src="utils.js"></script>
+		</main>
+		<script src="script.js"></script>
+		<script src="exos.js"></script>
+		<script src="utils.js"></script>
+	<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" nonce="TD12mHKq0TyBJoNkW4GkzA==" data-cf-beacon='{"version":"2024.11.0","token":"36b4216ae2dc4d5488c249161e71fe1e","spa":2}' crossorigin="anonymous"></script>
+</body>
 </html>
